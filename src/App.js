@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Phase1 from "./components/phase1";
+import Phase2 from "./components/phase2";
+import Phase3 from "./components/phase3"
+export default function App(){
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  const[details,setDetails] =  React.useState({name:"",firstName:"",lastName:"",email:"",livingAddress:"",phoneNumber:"",adharCardNumber:""})
+const[phase1,setPhase1] = React.useState(true);
+const[phase2,setPhase2] = React.useState(true);
+ 
+
+
+  return(
+   <div>
+    {phase1?<div><Phase1></Phase1><button onClick = {()=>setPhase1(!phase1)}> on CLick</button></div>:phase2?<div><button onClick = {()=>setPhase1(!phase1)}>BACK</button><Phase2></Phase2><button onClick = {()=>setPhase2(!phase2)}>on click part2</button></div>:<div><button onClick ={()=>setPhase2(!phase2)}>BACK</button><Phase3></Phase3><button>on click part3</button></div>}
+   
+ 
+   </div>
   );
 }
-
-export default App;
