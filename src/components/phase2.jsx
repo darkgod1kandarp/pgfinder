@@ -1,5 +1,6 @@
 import React from "react";
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from "react-places-autocomplete";
+
 export default function Phase2({ setDetails, details }) {
 
     const [address, setAddress] = React.useState("");
@@ -7,9 +8,34 @@ export default function Phase2({ setDetails, details }) {
         lat: null,
         lng: null
     });
-
+    const convertBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+          const fileReader = new FileReader();
+          fileReader.readAsDataURL(file);
+    
+          fileReader.onload = () => {
+            resolve(fileReader.result);
+          };
+    
+          fileReader.onerror = (error) => {
+            reject(error);
+          };
+        });
+      };
+    const [count,setCount] = React.useState(0);
     const[state,setState] = React.useState([]);
+    const fileToBase64 = async()=>{
+        var x;
+     
+      for (x of details.files){
+         setCount(count+1);
+        const fileing = await convertBase64(x);
+        setDetails({...details,count:fileing})
+      }
+      console.log(details);
 
+
+    }
     const handleSelect = async value => {
         const results = await geocodeByAddress(value);
         const latLng = await getLatLng(results[0]);
@@ -64,6 +90,7 @@ export default function Phase2({ setDetails, details }) {
                     </div>
                 )}
             </PlacesAutocomplete>
+            <button onClick = {fileToBase64}>Complete</button>
 
         </div>
 
