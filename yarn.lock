@@ -11217,6 +11217,11 @@ vendors@^1.0.0:
   resolved "https://registry.yarnpkg.com/vendors/-/vendors-1.0.4.tgz"
   integrity sha512-/juG65kTL4Cy2su4P8HjtkTxk6VmJDiOPBufWniqQ6wknac6jNiXS9vU+hO3wgusiyqWlzTbVHi0dyJqRONg3w==
 
+verifierjs@0.4.9:
+  version "0.4.9"
+  resolved "https://registry.yarnpkg.com/verifierjs/-/verifierjs-0.4.9.tgz#ceaea336ba55188d73f43faef2cf58c064331dc9"
+  integrity sha512-dgtFyw/c+w261t9WD7yIRPXYxIYUJXI+WT4aBnmF2lq/1IcNVV7umVwh1HLzHCb6xGCMqIYPQXEcfiVoQmZI7w==
+
 verror@1.10.0:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/verror/-/verror-1.10.0.tgz"

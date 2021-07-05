@@ -20,6 +20,7 @@
     "react-scripts": "4.0.3",
     "react-speech-recognition": "^3.8.2",
     "use-places-autocomplete": "^1.9.3",
+    "verifierjs": "0.4.9",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
