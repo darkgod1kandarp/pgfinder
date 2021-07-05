@@ -1,7 +1,8 @@
 import React from "react";
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from "react-places-autocomplete";
+import { RadioGroup, RadioButton,ReversedRadioButton } from 'react-radio-buttons';
 
-export default function Phase2({ setDetails, details }) {
+export default function Phase2({ setDetails, details,state,setState }) {
 
     const [address, setAddress] = React.useState("");
     const [coordinates, setCoordinates] = React.useState({
@@ -23,14 +24,14 @@ export default function Phase2({ setDetails, details }) {
         });
       };
     const [count,setCount] = React.useState(0);
-    const[state,setState] = React.useState([]);
+
     const fileToBase64 = async()=>{
         var x;
      
       for (x of details.files){
          setCount(count+1);
         const fileing = await convertBase64(x);
-        setDetails({...details,count:fileing})
+        setState([...state,fileing])
       }
       console.log(details);
 
@@ -51,7 +52,7 @@ export default function Phase2({ setDetails, details }) {
      }
  
 
-
+    const[wifi,setWifi] = React.useState(false);
 
     return (
         <div>
@@ -67,8 +68,6 @@ export default function Phase2({ setDetails, details }) {
             >
                 {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
                     <div>
-                        <p>Latitude: {coordinates.lat}</p>
-                        <p>Longitude: {coordinates.lng}</p>
 
                         <input {...getInputProps({ placeholder: "Type address" })} />
 
@@ -88,8 +87,20 @@ export default function Phase2({ setDetails, details }) {
                             })}
                         </div>
                     </div>
+
+
                 )}
             </PlacesAutocomplete>
+    
+           
+  <input type = "radio" value ="wifi" name = "wifi" onChange = {()=>{
+
+
+setWifi(!wifi);
+      setDetails({...details,wifi:wifi});
+    }
+}></input>
+
             <button onClick = {fileToBase64}>Complete</button>
 
         </div>

@@ -15,6 +15,8 @@ export default function App() {
   const [phase1, setPhase1] = React.useState(true);
   const [phase2, setPhase2] = React.useState(true);
 
+  const[state,setState] = React.useState([]);
+
   return (
     <div>
       {phase1 ? (
@@ -24,9 +26,12 @@ export default function App() {
         </div>
       ) : phase2 ? (
         <div>
-          <button onClick={() => setPhase1(!phase1)}>BACK</button>
-          <Phase2 setDetails={setDetails} details={details}></Phase2>
-          <button onClick={() => setPhase2(!phase2)}>on click part2</button>
+          <button onClick={() => {setPhase1(!phase1);  console.log(state);}}>BACK</button>
+          <Phase2 setDetails={setDetails} details={details} state = {state} setState ={setState} ></Phase2>
+          <button onClick={() => {setPhase2(!phase2)   
+            setDetails({...details,state})
+          
+          }}>on click part2</button>
         </div>
       ) : (
         <div>
