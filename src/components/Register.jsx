@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Phase1 from "./phase1";
-import Phase2 from "./phase2";
+
 import Phase3 from "./phase3";
 import { useHistory } from "react-router-dom";
 const Register = () => {
@@ -13,29 +13,9 @@ const Register = () => {
     phoneNumber: "",
     adharCardNumber: "",
   });
-  const convertBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
+  
 
-      fileReader.onload = () => {
-        resolve(fileReader.result);
-      };
-
-      fileReader.onerror = (error) => {
-        reject(error);
-      };
-    });
-  };
-
-  const fileToDataURI = async () => {
-    for (let x of details.files) {
-      const fileing = await convertBase64(x);
-      setState((prevState) => {
-        return { ...prevState, [x.name]: fileing };
-      });
-    }
-  };
+ 
 
   const history = useHistory();
 
@@ -49,8 +29,8 @@ const Register = () => {
     adharCardNumberErr: "",
   });
   const [Phase, setPhase] = useState("Phase1");
-  const [checkedItems, setCheckedItems] = React.useState({});
-  const [state, setState] = useState({});
+ 
+     
   
   const next = async () => {
     if (Phase === "Phase1") {
@@ -71,10 +51,7 @@ const Register = () => {
     //   setPhase("Phase3");
     // }
   };
-  React.useEffect(() => {
-   setDetails({...details,state})
-   
-  }, [state]);
+  
 
   
   const back = () => {

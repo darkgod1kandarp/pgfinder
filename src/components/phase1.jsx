@@ -51,7 +51,7 @@ export default function Phase1({ setDetails, details, error, setError }) {
         }}
         placeholder="lastname "
       ></input>
-
+     
       <input
         type="text"
         placeholder="mobile number"

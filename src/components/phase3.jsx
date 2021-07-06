@@ -1,16 +1,6 @@
 import React from "react";
 export default function Phase3() {
-  const [details, setDetails] = React.useState({
-    name: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    livingAddress: "",
-    phoneNumber: "",
-    adharCardNumber: "",
-  });
-  const [phase1, setPhase1] = React.useState(true);
-  const [phase2, setPhase2] = React.useState(true);
+
 
   return (
     <div>

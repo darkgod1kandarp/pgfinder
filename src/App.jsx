@@ -1,12 +1,14 @@
 import React from "react";
-import Phase1 from "./components/phase1";
-import Phase2 from "./components/phase2";
-import Phase3 from "./components/phase3";
+// import Phase1 from "./components/phase1";
+// import Phase2 from "./components/phase2";
+// import Phase3 from "./components/phase3";
 import Register from "./components/Register";
 import Dashboard from "./components/dashboard";
-import Op from "./components/op"
+// import Op from "./components/op"
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import LoginPage from "./components/LoginPage";
+import PgFinderLogin from "./components/PgFinderLogin";
+import PgPage from "./components/PgPage";
 export default function App() {
   // const [details, setDetails] = React.useState({
   //   name: "",
@@ -22,12 +24,17 @@ export default function App() {
 
   // const[state,setState] = React.useState([]);
 
+
+  
+
   return (
     <div className="">
       <BrowserRouter><Switch>
         <Route path="/login"  component={LoginPage}></Route>
         <Route path="/home" component={Register}></Route>
         <Route path="/dashboard" component={Dashboard}></Route>
+        <Route path ="/pgfinderlogin" component = {PgFinderLogin}></Route>
+        <Route path = "/pgpage" component = {PgPage}></Route>
         </Switch></BrowserRouter>
     
     </div>

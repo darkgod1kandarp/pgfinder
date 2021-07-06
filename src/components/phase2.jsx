@@ -3,11 +3,7 @@ import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
-import {
-  RadioGroup,
-  RadioButton,
-  ReversedRadioButton,
-} from "react-radio-buttons";
+
 
 export default function Phase2() {
   const [address, setAddress] = React.useState("");
@@ -35,25 +31,29 @@ export default function Phase2() {
     });
   };
 
-  const fileToDataURI = async () => {
-    for (let x of files) {
-      const fileing = await convertBase64(x);
-      console.log(fileing);
-      setState((prevState) => {
-        return { ...prevState, [x.name]: fileing };
-      });
-    }
-  };
+ 
 
   React.useEffect(()=>{
    setDetails((prevDetails)=>{return {...details,state}})
-   console.log(details);
-  },[state])
-  React.useEffect(async()=>{
+  
+  },[state,details])
+  React.useEffect(()=>{
+
+      
    
-    await fileToDataURI();
+    const fileToDataURI = async () => {
+      for (let x of files) {
+        const fileing = await convertBase64(x);
+        console.log(fileing);
+        setState((prevState) => {
+          return { ...prevState, [x.name]: fileing };
+        });
+      }
+    };
+
+    fileToDataURI();
    
-    console.log(state);
+    
      
   },[files]);
 
@@ -168,7 +168,7 @@ export default function Phase2() {
 
   React.useEffect(()=>{
     setDetails({ ...details, lat: coordinates.lat, lng: coordinates.lng });
-  },[coordinates])
+  },[coordinates,details])
 
   const fileSelectHandler = async ({ target }) => {
     
