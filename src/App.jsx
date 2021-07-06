@@ -33,7 +33,7 @@ export default function App() {
         <Route path="/login"  component={LoginPage}></Route>
         <Route path="/home" component={Register}></Route>
         <Route path="/dashboard" component={Dashboard}></Route>
-        <Route path ="/pgfinderlogin" component = {PgFinderLogin}></Route>
+        <Route path ="/" component = {PgFinderLogin}></Route>
         <Route path = "/pgpage" component = {PgPage}></Route>
         </Switch></BrowserRouter>
     
