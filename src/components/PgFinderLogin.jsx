@@ -30,7 +30,7 @@ const PgFinderLogin = () => {
       async function fetchApi() {
         await axios({
           method: "post",
-          url: "http://localhost:5000/api/posts",
+          url: "https://murmuring-headland-03833.herokuapp.com/api/login",
           headers: { Authorization: jwt },
         })
           .then(async (res) => {
@@ -38,7 +38,7 @@ const PgFinderLogin = () => {
             console.log(data);
             await axios({
               method: "post",
-              url: "http://localhost:5000/api/datagaining",
+              url: "https://murmuring-headland-03833.herokuapp.com/api/datagaining",
               params: {
                 data,
               },
@@ -65,7 +65,7 @@ const PgFinderLogin = () => {
     await localStorage.setItem("data", JSON.stringify(state));
     axios({
         method: "post",
-        url: "http://localhost:5000/api/login",
+        url: "https://murmuring-headland-03833.herokuapp.com/api/login",
         data: state,
       }).then((response) =>
         localStorage.setItem("jwt", JSON.stringify(response.data))
@@ -81,7 +81,7 @@ const PgFinderLogin = () => {
     console.log(op);
     axios({
       method: "post",
-      url: "http://localhost:5000/api/login",
+      url: "https://murmuring-headland-03833.herokuapp.com/api/login",
       data: op,
     }).then((response) =>
       localStorage.setItem("jwt", JSON.stringify(response.data))
