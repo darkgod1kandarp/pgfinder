@@ -4,12 +4,11 @@ import axios from "axios";
 import { useHistory } from "react-router-dom";
 const PgFinderLogin = () => {
   const history = useHistory();
-
-  const { token } = JSON.parse(localStorage.getItem("jwt"));
-
-  const jwt = `Bearer ${token}`;
+ 
+  
 
   useEffect(() => {
+    
     const checkingIfTheLocalStorageHaveTheDataOrNot =
       localStorage.getItem("jwt");
     console.log(checkingIfTheLocalStorageHaveTheDataOrNot);
@@ -17,6 +16,9 @@ const PgFinderLogin = () => {
       checkingIfTheLocalStorageHaveTheDataOrNot !== null ||
       checkingIfTheLocalStorageHaveTheDataOrNot !== undefined
     ) {
+        const { token } = JSON.parse(localStorage.getItem("jwt"));
+
+    const jwt = `Bearer ${token}`;
       console.log(123);
       async function fetchApi() {
         await axios({
@@ -48,13 +50,16 @@ const PgFinderLogin = () => {
       }
       fetchApi();   
     }
-  }, [history,jwt]);
+  }, [history]);
 
   const [state, setState] = useState({ username: "", password: "" });
   const responseGoogle = async (response) => {
     setState({ username: response.Ys.It, password: response.Ys.Ve });
     await localStorage.setItem("data", JSON.stringify(state));
+    const { token } = JSON.parse(localStorage.getItem("jwt"));
 
+    const jwt = `Bearer ${token}`;
+    
     await axios({
       method: "post",
       url: "http://localhost:5000/api/datagaining",
