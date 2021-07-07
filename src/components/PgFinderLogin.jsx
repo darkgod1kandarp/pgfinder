@@ -30,7 +30,7 @@ const PgFinderLogin = () => {
       async function fetchApi() {
         await axios({
           method: "post",
-          url: "https://murmuring-headland-03833.herokuapp.com/api/login",
+          url: "http://localhost:5000/api/login",
           headers: { Authorization: jwt },
         })
           .then(async (res) => {
@@ -38,7 +38,7 @@ const PgFinderLogin = () => {
             console.log(data);
             await axios({
               method: "post",
-              url: "https://murmuring-headland-03833.herokuapp.com/api/datagaining",
+              url: "http://localhost:5000/api/datagaining",
               params: {
                 data,
               },
@@ -47,7 +47,7 @@ const PgFinderLogin = () => {
               .then((response) => {
                 console.log(response);
 
-                history.push("/pgfinderhomepage");
+                history.push("/pg");
               })
               .catch((err) => console.log(err));
           })
@@ -61,11 +61,12 @@ const PgFinderLogin = () => {
 
   const [state, setState] = useState({ username: "", password: "" });
   const responseGoogle = async (response) => {
+      console.log(response);
     setState({ username: response.Ys.It, password: response.Ys.Ve });
     await localStorage.setItem("data", JSON.stringify(state));
     axios({
         method: "post",
-        url: "https://murmuring-headland-03833.herokuapp.com/api/login",
+        url: "http://localhost:5000/api/login",
         data: state,
       }).then((response) =>
         localStorage.setItem("jwt", JSON.stringify(response.data))
@@ -81,11 +82,11 @@ const PgFinderLogin = () => {
     console.log(op);
     axios({
       method: "post",
-      url: "https://murmuring-headland-03833.herokuapp.com/api/login",
+      url: "http://localhost:5000/api/login",
       data: op,
     }).then((response) =>{
       localStorage.setItem("jwt", JSON.stringify(response.data))
-      history.push("/pgfinderhomepage")
+      history.push("/pg")
     }
     );
   };
@@ -112,7 +113,7 @@ const PgFinderLogin = () => {
         Submit
       </button>
       <GoogleLogin
-        clientId="1057081408783-no215q4qet3l1t84s0a1dvhopjecfq5n.apps.googleusercontent.com"
+        clientId="863493315126-7lv128pfcvn3kl7gqv56c6928474gcth.apps.googleusercontent.com"
         buttonText="Login"
         onSuccess={responseGoogle}
         onFailure={responseGoogle}

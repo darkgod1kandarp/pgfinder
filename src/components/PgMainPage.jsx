@@ -1,7 +1,7 @@
 import React from 'react';
  const PgMainPage = ()=>{
 
-    const[point,setPoint] = React.usestate({lat:null,lng:null});
+    const[point,setPoint] = React.useState({lat:null,lng:null});
 
 
     React.useEffect(() =>{

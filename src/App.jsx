@@ -9,6 +9,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import LoginPage from "./components/LoginPage";
 import PgFinderLogin from "./components/PgFinderLogin";
 import PgPage from "./components/PgPage";
+import PgMainPage from "./components/PgMainPage";
 export default function App() {
   // const [details, setDetails] = React.useState({
   //   name: "",
@@ -33,8 +34,11 @@ export default function App() {
         <Route path="/login"  component={LoginPage}></Route>
         <Route path="/home" component={Register}></Route>
         <Route path="/dashboard" component={Dashboard}></Route>
-        <Route path ="/" component = {PgFinderLogin}></Route>
+       
         <Route path = "/pgpage" component = {PgPage}></Route>
+        <Route path ="/pg" component ={PgMainPage}></Route>
+      <Route exact path ="/" component = {PgFinderLogin}></Route>
+        
         </Switch></BrowserRouter>
     
     </div>
