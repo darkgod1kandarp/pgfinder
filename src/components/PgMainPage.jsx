@@ -12,12 +12,14 @@ import React from 'react';
               });
             
     
-            },[])
+            },[setPoint])
    
     return(
-
+    <>
+        <p>1234567897</p>
+    
         <p>{point.lat}</p>
-       
+      </> 
     );
  }
  export default PgMainPage;
