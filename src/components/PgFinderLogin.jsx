@@ -7,19 +7,26 @@ const PgFinderLogin = () => {
  
   
 
-  useEffect(() => {
+  useEffect(() => {  
     
-    const checkingIfTheLocalStorageHaveTheDataOrNot =
+    const checkingIfTheLocalStorageHaveTheDataOrNot =   
       localStorage.getItem("jwt");
     console.log(checkingIfTheLocalStorageHaveTheDataOrNot);
     if (
       checkingIfTheLocalStorageHaveTheDataOrNot !== null ||
       checkingIfTheLocalStorageHaveTheDataOrNot !== undefined
     ) {
+        var jwt;
+        try{
         const { token } = JSON.parse(localStorage.getItem("jwt"));
 
-    const jwt = `Bearer ${token}`;
-      console.log(123);
+     jwt = `Bearer ${token}`;
+        }
+        catch(err){
+          jwt ="";
+        }
+
+    
       async function fetchApi() {
         await axios({
           method: "post",
@@ -56,20 +63,15 @@ const PgFinderLogin = () => {
   const responseGoogle = async (response) => {
     setState({ username: response.Ys.It, password: response.Ys.Ve });
     await localStorage.setItem("data", JSON.stringify(state));
-    const { token } = JSON.parse(localStorage.getItem("jwt"));
-
-    const jwt = `Bearer ${token}`;
+    axios({
+        method: "post",
+        url: "http://localhost:5000/api/login",
+        data: state,
+      }).then((response) =>
+        localStorage.setItem("jwt", JSON.stringify(response.data))
+      );
     
-    await axios({
-      method: "post",
-      url: "http://localhost:5000/api/datagaining",
-      params: { data: { password: response.Ys.It, username: response.Ys.Ve } },
-      headers: { Authorization: jwt },
-    })
-      .then((res) => {
-        console.log(response);
-      })
-      .catch((err) => console.log(err));
+   
   };
 
   const handleClick = async () => {
