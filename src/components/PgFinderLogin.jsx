@@ -83,8 +83,10 @@ const PgFinderLogin = () => {
       method: "post",
       url: "https://murmuring-headland-03833.herokuapp.com/api/login",
       data: op,
-    }).then((response) =>
+    }).then((response) =>{
       localStorage.setItem("jwt", JSON.stringify(response.data))
+      history.push("/home")
+    }
     );
   };
 
