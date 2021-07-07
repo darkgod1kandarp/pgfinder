@@ -47,7 +47,7 @@ const PgFinderLogin = () => {
               .then((response) => {
                 console.log(response);
 
-                history.push("/home");
+                history.push("/pgfinderhomepage");
               })
               .catch((err) => console.log(err));
           })
@@ -85,10 +85,12 @@ const PgFinderLogin = () => {
       data: op,
     }).then((response) =>{
       localStorage.setItem("jwt", JSON.stringify(response.data))
-      history.push("/home")
+      history.push("/pgfinderhomepage")
     }
     );
   };
+
+  
 
   return (
     <>
