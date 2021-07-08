@@ -92,7 +92,7 @@ const PgFinderLogin = () => {
   };
 
   
-
+  
   return (
     <>
       <input
@@ -119,6 +119,7 @@ const PgFinderLogin = () => {
         onFailure={responseGoogle}
         cookiePolicy={"single_host_origin"}
       />
+      <button type ="submit" onClick = {()=>history.push("/Signup")}></button>
     </>
   );
 };

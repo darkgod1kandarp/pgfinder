@@ -10,6 +10,7 @@ import LoginPage from "./components/LoginPage";
 import PgFinderLogin from "./components/PgFinderLogin";
 import PgPage from "./components/PgPage";
 import PgMainPage from "./components/PgMainPage";
+import SignUp from "./components/signup";
 export default function App() {
   // const [details, setDetails] = React.useState({
   //   name: "",
@@ -37,6 +38,7 @@ export default function App() {
        
         <Route path = "/pgpage" component = {PgPage}></Route>
         <Route path ="/pg" component ={PgMainPage}></Route>
+        <Route path ="/Signup" component ={SignUp}></Route>
       <Route exact path ="/" component = {PgFinderLogin}></Route>
         
         </Switch></BrowserRouter>

@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.12.1",
     "@reach/combobox": "^0.15.2",
     "@speechly/speech-recognition-polyfill": "^1.0.0",
     "@testing-library/jest-dom": "^5.11.4",
