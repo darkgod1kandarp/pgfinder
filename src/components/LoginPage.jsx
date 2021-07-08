@@ -42,7 +42,7 @@ export default function LoginPage(){
               headers: { Authorization: jwt },
             })
               .then((response) => {
-                
+                 console.log(response);
                 if (response.data.data==="/pg"){ 
                   history.push({pathname:"/pg"});
                 }
