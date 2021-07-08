@@ -78,12 +78,14 @@ export const AvailableFor =({selectedFilter,setSelectedFilter})=>{
      setCheckedItems({
        ...checkedItems,
        [event.target.name]: event.target.checked,
+       setSelectedFilter({...selectedFilter ,avaible:checkedItems})
+
      });
      
    };
-   useEffect(() => {
-    setSelectedFilter({...selectedFilter ,avaible:checkedItems})
-  }, [checkedItems, selectedFilter, setSelectedFilter])
+  //  useEffect(() => {
+  //   setSelectedFilter({...selectedFilter ,avaible:checkedItems})
+  // }, [checkedItems, selectedFilter, setSelectedFilter])
   
   const checkboxes = [
      {
