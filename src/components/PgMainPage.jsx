@@ -1,4 +1,5 @@
 import React from 'react';
+import SearchBar from './searchbar';
  const PgMainPage = ()=>{
 
     const[point,setPoint] = React.useState({lat:null,lng:null});
@@ -16,9 +17,7 @@ import React from 'react';
    
     return(
     <>
-        <p>1234567897</p>
-    
-        <p>{point.lat}</p>
+        <SearchBar/>
       </> 
     );
  }

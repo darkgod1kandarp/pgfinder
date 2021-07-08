@@ -48,6 +48,7 @@ const PgFinderLogin = () => {
                 console.log(response);
 
                 history.push("/pg");
+
               })
               .catch((err) => console.log(err));
           })
@@ -61,16 +62,22 @@ const PgFinderLogin = () => {
 
   const [state, setState] = useState({ username: "", password: "" });
   const responseGoogle = async (response) => {
-      console.log(response);
+     try{
     setState({ username: response.Ys.It, password: response.Ys.Ve });
     await localStorage.setItem("data", JSON.stringify(state));
     axios({
         method: "post",
-        url: "http://localhost:5000/api/login",
+        url: "https://murmuring-headland-03833.herokuapp.com/api/login",
         data: state,
-      }).then((response) =>
+      }).then((response) =>{
         localStorage.setItem("jwt", JSON.stringify(response.data))
+        history.push("/pg")
+      }
       );
+    }
+    catch(err){
+      console.log(err);
+    }
     
    
   };
@@ -82,10 +89,12 @@ const PgFinderLogin = () => {
     console.log(op);
     axios({
       method: "post",
-      url: "http://localhost:5000/api/login",
+      url: "https://murmuring-headland-03833.herokuapp.com/api/login",
       data: op,
     }).then((response) =>{
+      console.log(response);
       localStorage.setItem("jwt", JSON.stringify(response.data))
+      console.log(123)
       history.push("/pg")
     }
     );

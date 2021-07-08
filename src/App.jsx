@@ -16,6 +16,7 @@ import SearchBar from "./components/searchbar";
 
 
 
+
 export default function App() {
   // const [details, setDetails] = React.useState({
   //   name: "",
@@ -44,8 +45,10 @@ export default function App() {
         <Route path = "/pgpage" component = {PgPage}></Route>
         <Route path ="/pg" component ={PgMainPage}></Route>
         <Route path ="/Signup" component ={SignUp}></Route>
-      <Route exact path ="/" component = {PgFinderLogin}></Route>
         <Route path ="/searchbar" component={SearchBar}></Route>
+        <Route path="/pgfinderlogin" component = {PgFinderLogin}></Route>
+      <Route exact path ="/" component = {LoginPage}></Route>
+       
         </Switch></BrowserRouter>
     
     </div>

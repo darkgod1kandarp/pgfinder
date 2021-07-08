@@ -18,6 +18,7 @@ const SearchBar = () => {
 
   return (
     <div className="">
+        <p>fefeds</p>
       <div
         className="searchbar"
         contentEditable
