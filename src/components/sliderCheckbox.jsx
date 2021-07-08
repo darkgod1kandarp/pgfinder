@@ -82,9 +82,8 @@ export const AvailableFor =({selectedFilter,setSelectedFilter})=>{
      
    };
    useEffect(() => {
-    console.log(checkedItems)
     setSelectedFilter({...selectedFilter ,avaible:checkedItems})
-  }, [checkedItems])
+  }, [checkedItems, selectedFilter, setSelectedFilter])
   
   const checkboxes = [
      {

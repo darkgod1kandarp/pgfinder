@@ -11,6 +11,11 @@ import PgFinderLogin from "./components/PgFinderLogin";
 import PgPage from "./components/PgPage";
 import PgMainPage from "./components/PgMainPage";
 import SignUp from "./components/signup";
+import SearchBar from "./components/searchbar";
+
+
+
+
 export default function App() {
   // const [details, setDetails] = React.useState({
   //   name: "",
@@ -40,7 +45,7 @@ export default function App() {
         <Route path ="/pg" component ={PgMainPage}></Route>
         <Route path ="/Signup" component ={SignUp}></Route>
       <Route exact path ="/" component = {PgFinderLogin}></Route>
-        
+        <Route path ="/searchbar" component={SearchBar}></Route>
         </Switch></BrowserRouter>
     
     </div>

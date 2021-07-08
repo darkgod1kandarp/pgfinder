@@ -25,7 +25,6 @@ const SearchBar = () => {
           setFilterPopUp(true);
         }}
       >
-        {!filterPopUp && <p>search</p>}
       </div>
       {filterPopUp && (
         <div className="filter">
