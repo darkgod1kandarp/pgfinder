@@ -17,6 +17,7 @@ import SearchBar from './searchbar';
    
     return(
     <>
+    {point.lat}
         <SearchBar/>
       </> 
     );
