@@ -12,7 +12,7 @@ import PgPage from "./components/PgPage";
 import PgMainPage from "./components/PgMainPage";
 import SignUp from "./components/signup";
 import SearchBar from "./components/searchbar";
-
+import CircleLoader from "./components/circleloader";
 
 
 
@@ -47,6 +47,7 @@ export default function App() {
         <Route path ="/Signup" component ={SignUp}></Route>
         <Route path ="/searchbar" component={SearchBar}></Route>
         <Route path="/pgfinderlogin" component = {PgFinderLogin}></Route>
+        <Route path ="/Circle" component = {CircleLoader}></Route>
       <Route exact path ="/" component = {LoginPage}></Route>
        
         </Switch></BrowserRouter>

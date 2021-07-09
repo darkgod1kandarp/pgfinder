@@ -1,8 +1,10 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from "axios";
+import ScatterBoxLoader from './circleloader';
 export default function LoginPage(){
     const history =  useHistory();
+     const[loading,setLoading] =  useState(true);
  
     React.useEffect(() =>{
      
@@ -46,10 +48,11 @@ export default function LoginPage(){
                 if (response.data.data==="/pg"){ 
                   history.push({pathname:"/pg"});
                 }
-               
+                setLoading(false)
                 
               })
-              .catch((err) => console.log(err));
+              
+              .catch((err) => setLoading(false));
           })
          
       }
@@ -57,7 +60,7 @@ export default function LoginPage(){
     }
     },[history])
     return(
-
+         loading?<ScatterBoxLoader/>:
         <div>
           <button onClick ={()=>{history.push("/home")}} >As PG Owner</button>
           <button onClick = {()=>{history.push("/pgfinderlogin")}}>A PG Finder </button>

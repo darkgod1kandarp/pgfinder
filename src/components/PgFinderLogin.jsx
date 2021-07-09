@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import GoogleLogin from "react-google-login";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import ScatterBoxLoader from "./circleloader"
 const PgFinderLogin = () => {
   const history = useHistory();
  
-  
+  const[loading ,setLoading] =  useState(true);
 
   useEffect(() => {  
     
@@ -45,14 +46,19 @@ const PgFinderLogin = () => {
               headers: { Authorization: jwt },
             })
               .then((response) => {
-                console.log(response);
+                
+
 
                 history.push("/pg");
 
               })
-              .catch((err) => console.log(err));
+              .catch((err) => 
+              setLoading(  
+                false
+              ));
           })
           .catch((err) => {
+            setLoading(false)
             // history.push("/home");
           });
       }
@@ -93,8 +99,8 @@ const PgFinderLogin = () => {
       data: op,
     }).then((response) =>{
       console.log(response);
+      setLoading(false);
       localStorage.setItem("jwt", JSON.stringify(response.data))
-      console.log(123)
       history.push("/pg")
     }
     );
@@ -103,6 +109,7 @@ const PgFinderLogin = () => {
   
   
   return (
+    loading?<ScatterBoxLoader/>:
     <>
       <input
         type="text"
