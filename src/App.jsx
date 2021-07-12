@@ -13,6 +13,8 @@ import PgMainPage from "./components/PgMainPage";
 import SignUp from "./components/signup";
 import SearchBar from "./components/searchbar";
 import CircleLoader from "./components/circleloader";
+import Card  from "./components/card";
+import Imageslider from "./components/Imagelider";
 
 
 
@@ -33,8 +35,6 @@ export default function App() {
   // const[state,setState] = React.useState([]);
 
 
-  
-
   return (
     <div className="">
       <BrowserRouter><Switch>
@@ -48,7 +48,10 @@ export default function App() {
         <Route path ="/searchbar" component={SearchBar}></Route>
         <Route path="/pgfinderlogin" component = {PgFinderLogin}></Route>
         <Route path ="/Circle" component = {CircleLoader}></Route>
+        <Route path ="/card" component={Card}></Route>
+        <Route path="/slider" component={Imageslider}></Route>
       <Route exact path ="/" component = {LoginPage}></Route>
+      
        
         </Switch></BrowserRouter>
     
