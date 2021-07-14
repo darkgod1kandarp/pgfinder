@@ -12,12 +12,12 @@ import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import FullscreenExitIcon from "@material-ui/icons/FullscreenExit";
 import FullscreenIcon from "@material-ui/icons/Fullscreen";
 import screenfull from "screenfull";
-const Slider = ({ images, length1 }) => {
+const Slider = ({ images, length1, setSlider }) => {
   const [imageZoomIn, setImageZoomIn] = useState({ height: 100, width: 500 });
   const [state, setState] = useState(true);
   const initialState = { height: 100, width: 500 };
   const [settingimage, setSettingImage] = useState(
-    "https://images.theconversation.com/files/350865/original/fil…jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop"
+    images[0].url
   );
    const[imageHeigth,setImageHeight] = useState("100%");
   const [middleHeight, setMiddleHeight] = useState("550px");
@@ -46,9 +46,13 @@ const Slider = ({ images, length1 }) => {
   return (
     <>
       <div className="App">
-        <div className="upper1"></div>
+        <div className="upper1">
+          <button onClick={()=>{setSlider(false)}}>X</button>
+        </div>
+          
         <div className="middle" style={{ height: middleHeight }}>
           <div className="mainimage">
+            
             <img
               src={settingimage}
               style={{
@@ -121,7 +125,7 @@ const Slider = ({ images, length1 }) => {
           <div className="backwardbutton">
             <ArrowBackIosIcon
               onClick={() => (left !== 0 ? setLeft(left + 164) : setLeft(left))}
-              className="backb"
+              className="back"
             />
           </div>
           <div

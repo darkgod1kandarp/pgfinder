@@ -1,5 +1,4 @@
 import React from 'react';
-import SimpleImageSlider from "react-simple-image-slider";
 import Slider from "./slider"
 const Imageslider = ()=>{
     const images = [{url:"https://www.howtogeek.com/wp-content/uploads/2018/06/shutterstock_1006988770.png?height=200p&trim=2,2,2,2"},

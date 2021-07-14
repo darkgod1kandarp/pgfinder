@@ -1,7 +1,18 @@
+import { grey } from "@material-ui/core/colors";
 import React, { useState, useEffect } from "react";
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-places-autocomplete";
 
 import { Budget, Area, AvailableFor } from "./sliderCheckbox";
 const SearchBar = () => {
+  const [address, setAddress] = React.useState("");
+  const [coordinates, setCoordinates] = React.useState({
+    lat: null,
+    lng: null,
+  });
+
   const [filterPopUp, setFilterPopUp] = useState(false);
   const [filterType, setFilterType] = useState("buget");
   const [selectedFilter, setSelectedFilter] = useState({
@@ -12,23 +23,63 @@ const SearchBar = () => {
     available: {},
   });
 
+  const handleSelect = async (value) => {
+    
+    const results = await geocodeByAddress(value);
+    const latLng = await getLatLng(results[0]);
+    setAddress(value);
+    setCoordinates(latLng);
+    console.log(results )
+
+  };
   useEffect(() => {
     console.log(selectedFilter);
+    
   }, [selectedFilter]);
 
   return (
     <div className="">
-        <p>fefeds</p>
+
       <div
+        
         className="searchbar"
-        contentEditable
         onClick={() => {
-          setFilterPopUp(true);
+          setFilterPopUp(true); 
         }}
       >
-      </div>
+        
+      <label htmlFor="">search here</label>
       {filterPopUp && (
-        <div className="filter">
+        <div className="filter" style={{position:"absolute",order:"top" ,width:"100vw" ,backgroundColor:"white",boxShadow:"5px 10px #888888" ,padding:"1rem"}}>
+        <PlacesAutocomplete
+         style={{position:"absolute",order:"top" ,width:"160px" ,backgroundColor:"white",boxShadow:"5px 10px #888888"}}
+        value={address}
+        onChange={setAddress}
+        onSelect={handleSelect}
+        
+        >
+        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
+          <div>
+            <input {...getInputProps({ placeholder: "Type address" })} />
+
+            <div>
+              {loading ? <div>...loading</div> : null}
+
+              {suggestions.map((suggestion) => {
+                const style = {
+                  backgroundColor: suggestion.active ? "#41b6e6" : "#fff",
+                };
+
+                return (
+                  <div {...getSuggestionItemProps(suggestion, { style })}>
+                    {suggestion.description}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </PlacesAutocomplete>
           <div className="budget">
             <button
               className="selctor"
@@ -93,6 +144,7 @@ const SearchBar = () => {
           <button
             onClick={() => {
               setFilterPopUp(false);
+              
               console.log(selectedFilter);
             }}
           >
@@ -100,6 +152,8 @@ const SearchBar = () => {
           </button>
         </div>
       )}
+      </div>
+      
     </div>
   );
 };

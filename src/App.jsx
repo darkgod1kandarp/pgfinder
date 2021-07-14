@@ -15,7 +15,8 @@ import SearchBar from "./components/searchbar";
 import CircleLoader from "./components/circleloader";
 import Card  from "./components/card";
 import Imageslider from "./components/Imagelider";
-
+import App1 from "./components/card1";
+import SearchLocationInput from "./components/location";
 
 
 
@@ -48,6 +49,8 @@ export default function App() {
         <Route path ="/searchbar" component={SearchBar}></Route>
         <Route path="/pgfinderlogin" component = {PgFinderLogin}></Route>
         <Route path ="/Circle" component = {CircleLoader}></Route>
+        <Route path ="/123" component={App1}></Route>
+              
         <Route path ="/card" component={Card}></Route>
         <Route path="/slider" component={Imageslider}></Route>
       <Route exact path ="/" component = {LoginPage}></Route>
@@ -55,6 +58,9 @@ export default function App() {
        
         </Switch></BrowserRouter>
     
+
+{/* <SearchLocationInput onChange={() => null} /> */}
+
     </div>
     // <div>
     //   {phase1 ? (

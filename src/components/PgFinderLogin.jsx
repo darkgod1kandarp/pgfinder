@@ -129,6 +129,7 @@ const PgFinderLogin = () => {
         Submit
       </button>
       <GoogleLogin
+        
         clientId="863493315126-7lv128pfcvn3kl7gqv56c6928474gcth.apps.googleusercontent.com"
         buttonText="Login"
         onSuccess={responseGoogle}

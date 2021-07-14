@@ -1,4 +1,4 @@
-import React from 'react'
+import React ,{useEffect} from 'react'
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 export  const Budget = ({selectedFilter,setSelectedFilter}) => 
@@ -85,9 +85,9 @@ export const AvailableFor =({selectedFilter,setSelectedFilter})=>{
      setSelectedFilter({...selectedFilter ,avaible:checkedItems})
      
    };
-  //  useEffect(() => {
-  //   setSelectedFilter({...selectedFilter ,avaible:checkedItems})
-  // }, [checkedItems, selectedFilter, setSelectedFilter])
+   useEffect(() => {
+    setSelectedFilter({...selectedFilter ,avaible:checkedItems})
+  }, [checkedItems, selectedFilter, setSelectedFilter])
   
   const checkboxes = [
      {
