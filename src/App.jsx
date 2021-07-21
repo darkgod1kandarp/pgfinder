@@ -15,11 +15,11 @@ import SearchBar from "./components/searchbar";
 import CircleLoader from "./components/circleloader";
 import Card  from "./components/card";
 import Imageslider from "./components/Imagelider";
-import App1 from "./components/card1";
 import SearchLocationInput from "./components/location";
+import Main from "./components/login/main";
+import PgLogin from "./components/pglogin";
 
-
-
+import AddPg from "./components/addpg";
 export default function App() {
   // const [details, setDetails] = React.useState({
   //   name: "",
@@ -39,6 +39,8 @@ export default function App() {
   return (
     <div className="">
       <BrowserRouter><Switch>
+        
+        
         <Route path="/login"  component={LoginPage}></Route>
         <Route path="/home" component={Register}></Route>
         <Route path="/dashboard" component={Dashboard}></Route>
@@ -49,11 +51,13 @@ export default function App() {
         <Route path ="/searchbar" component={SearchBar}></Route>
         <Route path="/pgfinderlogin" component = {PgFinderLogin}></Route>
         <Route path ="/Circle" component = {CircleLoader}></Route>
-        <Route path ="/123" component={App1}></Route>
               
         <Route path ="/card" component={Card}></Route>
         <Route path="/slider" component={Imageslider}></Route>
+        <Route path="/owner" component={AddPg}></Route>
+        
       <Route exact path ="/" component = {LoginPage}></Route>
+
       
        
         </Switch></BrowserRouter>

@@ -1527,6 +1527,11 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
+"@lukeed/csprng@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@lukeed/csprng/-/csprng-1.0.0.tgz#733a122382749d27e2e46ec38f8c71c9d53a9636"
+  integrity sha512-ruuGHsnabmObBdeMg3vKdGRmh06Oog3eFpf/Tk6X0kDSJDpJTDCj2dqdp1+0VjzIUgHlFF9GBm7uFqfYhhdX9g==
+
 "@material-ui/core@^4.12.1":
   version "4.12.1"
   resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-4.12.1.tgz#ac8f081498047aa02bb6ee70b77c5dad6a2a6e73"
@@ -9740,6 +9745,11 @@ react-google-places-autocomplete@2.0.5:
     prop-types "^15.6.2"
     react "^16.13.1"
 
+react-hook-geolocation@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/react-hook-geolocation/-/react-hook-geolocation-1.0.7.tgz#4ef265318dce8fd3f4f40496601571aad3887511"
+  integrity sha512-CO9Trtd0MuBf2hyOwINpj/bWa4anxCsg0DNav1auwwNSbUvgId3/j2UhpZIEApXjw7Jhc6CfEjhzBVaTbTlmJw==
+
 react-hook-google-maps@^0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/react-hook-google-maps/-/react-hook-google-maps-0.0.3.tgz#468b7631970a25ce070f9f2e7f5ca6fd6b6d536d"
@@ -11610,6 +11620,13 @@ ua-parser-js@^0.7.18:
   version "0.7.28"
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.28.tgz#8ba04e653f35ce210239c64661685bf9121dec31"
   integrity sha512-6Gurc1n//gjp9eQNXjD9O3M/sMwVtN5S8Lv9bvOYBfKfDNiIIhqiyi01vMBO45u4zkDE420w/e0se7Vs+sIg+g==
+
+uid@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/uid/-/uid-2.0.0.tgz#1773bec106e96955f1658f20272e2ccea414e8bc"
+  integrity sha512-hFw+zKBA1szYdbZWj6FjTxZzJnKNf+wTDcsxlJaXS64MCy9LQEmJUVieGYHCKek/WRyFIcs0cEXtGIQmfvHe2A==
+  dependencies:
+    "@lukeed/csprng" "^1.0.0"
 
 unicode-canonical-property-names-ecmascript@^1.0.4:
   version "1.0.4"

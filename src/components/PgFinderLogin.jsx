@@ -125,6 +125,13 @@ const PgFinderLogin = () => {
           setState({ ...state, password: target.value })
         }
       ></input>
+      <input
+        type="text"
+        placeholder="email"
+        onChange={({ target }) =>
+          setState({ ...state, email: target.value })
+        }
+      ></input>
       <button type="submit" onClick={handleClick}>
         Submit
       </button>

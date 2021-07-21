@@ -6,7 +6,6 @@ export  const Budget = ({selectedFilter,setSelectedFilter}) =>
     return `${value}`;
   }
 
-  console.log(selectedFilter)
   const [value, setValue] = React.useState([20, 37]);
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -82,12 +81,9 @@ export const AvailableFor =({selectedFilter,setSelectedFilter})=>{
 
      });
 
-     setSelectedFilter({...selectedFilter ,avaible:checkedItems})
      
    };
-   useEffect(() => {
-    setSelectedFilter({...selectedFilter ,avaible:checkedItems})
-  }, [checkedItems, selectedFilter, setSelectedFilter])
+   
   
   const checkboxes = [
      {

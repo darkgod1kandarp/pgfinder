@@ -72,12 +72,12 @@ export default function Phase2() {
       label: "facilities",
     },
     {
-      name: "washroom/bathroom",
+      name: "attched washroom/bathroom",
       key: 3,
       label: "facilities",
     },
     {
-      name: "power backup available",
+      name: "Wifi",
       key: 4,
       label: "facilities",
     },
@@ -103,41 +103,32 @@ export default function Phase2() {
       key: 8,
       label: "facilities",
     },
+  
     {
-      name: "four wheeler parking",
+      name: "gym",
       key: 9,
       label: "facilities",
     },
 
     {
-      name: "gym",
-      key: 10,
-      label: "facilities",
-    },
-
-    {
       name: "laundry",
-      key: 11,
+      key: 10,
       label: "facilities",
     },
     {
       name: "fridge",
-      key: 12,
+      key: 11,
       label: "facilities",
     },
     {
       name: "water cooler",
-      key: 13,
+      key: 12,
       label: "facilities",
     },
-    {
-      name: "warden",
-      key: 14,
-      label: "facilities",
-    },
+   
     {
       name: "microwave",
-      key: 15,
+      key: 13,
       label: "facilities",
     },
   ];

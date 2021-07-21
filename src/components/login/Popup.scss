@@ -1,0 +1,144 @@
+.background {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.popupwrapsignup{
+    width: 800px;
+    height: max-content;    
+    box-shadow: 0 5px 16px rgba(0, 0, 0, 0.5);
+    background: #fff;
+    color: #000;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    z-index: 10;
+    border-radius: 10px;
+    
+}
+.popup__link{
+  border: none;
+  font-size: 10px;
+  background-color: transparent;
+  margin-left: 5px;
+  padding: 0;
+  height: max-content;
+  color:#aaa;
+  cursor: pointer;
+  &:hover{
+    color:black;
+  }
+}
+
+.popupwrap {
+  width: 800px;
+  height: 500px;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.5);
+  background: #fff;
+  color: #000;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  z-index: 10;
+  border-radius: 10px;
+}
+.popupimgsignup{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px 0 0 10px;
+  }
+.popupimg {
+  max-height: 500px;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px 0 0 10px;
+}
+.popupcontent {
+  padding: 10px;;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.8;
+  color: #141414;
+
+  &--text{
+    margin-bottom: 0.5rem;
+  }
+
+  &submit {
+    padding: 10px 24px;
+    margin-top: 2rem;
+    background: #141414;
+    color: #fff;
+    border: none;
+    margin-right: 10px;
+    align-items:center;
+  }
+}
+.popupclose {
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  z-index: 10;
+}
+
+.form-group {
+  position: relative;
+  padding: 20px 0;
+  width: 300px;
+  max-width: 100%;
+}
+
+.form-group input {
+  border: none;
+  border-bottom: 1px solid #9e9e9e;
+  color: #333;
+  display: block;
+  font-size: 16px;
+  padding: 10px 0;
+  width: 100%;
+}
+
+.form-group label {
+  color: #9e9e9e;
+  font-size: 12px;
+  font-weight: 100;
+  top: 0;
+  left: 0;
+}
+.form-group label {
+  color: #9e9e9e;
+  font-size: 12px;
+  font-weight: 300;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  transform: translateY(30px);
+}
+.form-group input:valid + label,
+.form-group input:focus + label {
+  border-bottom-color: #ee6e73;
+  outline: none;
+}
+.form-group input:valid + label,
+.form-group input:focus + label {
+  color: #ee6e73;
+  font-size: 14px;
+  border:none;
+  transform: translateY(0);
+}
+.form-group label {
+  transition: all 0.2s ease-in-out;
+}
+.form-group input:focus-visible {
+outline: none
+}
