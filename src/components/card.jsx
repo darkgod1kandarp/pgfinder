@@ -8,11 +8,53 @@ import axios from "axios";
 import FilterSideBar from "./filterSiderbar";
 const Card = () => {
   const history = useHistory();
+
+  React.useEffect(() => {
+    const data = JSON.parse(localStorage.getItem("data"));
+
+    const checkingIfTheLocalStorageHaveTheDataOrNot =
+      localStorage.getItem("jwt");
+    console.log(checkingIfTheLocalStorageHaveTheDataOrNot);
+    if (
+      checkingIfTheLocalStorageHaveTheDataOrNot !== null ||
+      checkingIfTheLocalStorageHaveTheDataOrNot !== undefined
+    ) {
+      var jwt;
+
+      try {
+        const token = JSON.parse(checkingIfTheLocalStorageHaveTheDataOrNot);
+        console.log(token, "print");
+        jwt = `Bearer ${token}`;
+        console.log(jwt);
+      } catch (err) {
+        jwt = "";
+      }
+
+      async function fetchApi() {
+        //  console.log(data)
+        await axios({
+          method: "post",
+          url: "http://localhost:5000/api/checking",
+          headers: { Authorization: jwt },
+        })
+          .then(async (res) => {
+            console.log(res.data.message, "q4124");
+            if (res.data.message === "not verified") {
+              history.push("/");
+            }
+          })
+
+          .catch((err) => {});
+      }
+      fetchApi();
+    }
+  }, [history]);
   const [selectedFilter, setSelectedFilter] = useState({
     max_budget: 0,
     min_budget: 0,
     max_area: 0,
     min_area: 0,
+    available:"both"
   });
   const [bedrooms,setBedrooms]=useState({
     "1BHK":false,
@@ -51,6 +93,8 @@ const Card = () => {
     both: false,
   });
   
+  const [searchCities, setSearchCities] = useState({});
+
   useEffect(() => {
     
     var temp =Object.keys(bedrooms).filter(key => bedrooms[key])
@@ -61,9 +105,18 @@ const Card = () => {
     if(temp1.length===0){
       temp1=[1,2,3]
     }
-    setSelectedFilter({...selectedFilter,bedrooms:temp,sharing:temp1})
-  }, [bedrooms,sharing])
+    setSelectedFilter({...selectedFilter,bedrooms:temp,sharing:temp1,location:searchCities})
 
+
+  }, [bedrooms,sharing,searchCities])
+   const apply=()=>{
+    console.log(selectedFilter) 
+    axios({
+       method:"post"
+       ,url:"",
+       data:selectedFilter
+     })
+   } 
   const availableLabel = [
     {
       name: "boys",
@@ -81,8 +134,6 @@ const Card = () => {
       label: "avaibility",
     },
   ];
-
-  const [searchCities, setSearchCities] = useState({});
 
   
   const data = [
@@ -133,7 +184,7 @@ const Card = () => {
   ];
   
   const [state, setState] = useState(true);
-  const [array, setArray] = useState([]);
+  
   const [slider, setSlider] = useState(false);
   const[value,setValue] = useState();
   const handleClick = ({ target }) => {
@@ -142,9 +193,7 @@ const Card = () => {
     setSlider(true);    
     
   };
-  const h=()=>{
-    setSelectedFilter({...selectedFilter,available:available,sharing:sharing,location:searchCities,bedrooms:bedrooms})
-  }
+
   
   return (
     <>
@@ -182,8 +231,11 @@ const Card = () => {
               selectedFilter={selectedFilter}
               searchCities={searchCities}
               setSearchCities={setSearchCities}
+              bedrooms={bedrooms}
+              setBedrooms={setBedrooms}
+              apply={apply}
               />
-              <button onClick={h}>q</button>
+              
               {console.log(selectedFilter)}
 
             <Card1 handleClick={handleClick} slider={slider} setSlider={setSlider} data={data[0]  } image = {"image 0"} onClick={handleClick}/>

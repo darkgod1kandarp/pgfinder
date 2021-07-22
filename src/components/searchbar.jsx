@@ -16,7 +16,10 @@ const SearchBar = ({
   selectedFilter,
   setSelectedFilter,
   searchCities,
-  setSearchCities
+  setSearchCities,
+  bedrooms,
+  setBedrooms,
+  apply
 
 }) => {
   const [address, setAddress] = React.useState("");
@@ -36,7 +39,7 @@ const SearchBar = ({
   //   min_area: "",
   // });
   const [disCity, setDisCity] = useState([]);
-
+  console.log(disCity)
   //
   // const [searchCities, setSearchCities] = useState({});
 
@@ -48,7 +51,40 @@ const SearchBar = ({
     country: "",
   });
 
-
+  const bedroomsLabel=[
+    {
+      name:"1BHK",
+      key:1,
+      label:"no. of bedrooms"
+    },
+    {
+      name:"2BHK",
+      key:2,
+      label:"no. of bedrooms"
+    },
+    {
+      name:"3BHK",
+      key:3,
+      label:"no. of bedrooms"
+    },
+    {
+      name:"4BHK",
+      key:4,
+      label:"no. of bedrooms"
+    },
+    {
+      name:"5BHK",
+      key:4,
+      label:"no. of bedrooms"
+    },
+  ]
+  const handleChangeBHK=(event)=>{
+    setBedrooms({
+      ...bedrooms,
+      [event.target.name]: event.target.checked,
+    });
+    
+  }
   useEffect(() => {
     axios({
       method: "GET",
@@ -331,9 +367,40 @@ const SearchBar = ({
               </div>
               }
             </div>
+            <div className="bedrooms">
+            <button
+                className="selector"
+                onClick={() => {
+                  if (filterType === "bedroom") {
+                    setFilterType("");
+                  } else {
+                    setFilterType("bedroom");
+                  }
+                }}
+              >
+                bedroom
+              </button>
+
+            {
+              filterType==="bedroom" && 
+              <div className="">
+            {bedroomsLabel.map((item,i)=>(
+              <label key={item.key}>
+              {item.name}
+              <Checkbox
+                name={item.name}
+                checked={bedrooms[item.name]}
+                onChange={handleChangeBHK}
+              />
+            </label>
+            ))}
+            </div>
+          }
+          
+            </div>
 
             <div className="">
-              <button onClick={handleApply}>apply</button>
+              <button onClick={apply}>apply</button>
               {console.log(locality, searchCities)}
             </div>
           </div>
