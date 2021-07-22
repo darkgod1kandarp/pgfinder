@@ -21,7 +21,7 @@ export default function LoginPage() {
     username: "",
     password: "",
     email: "",
-    phoneNumer: "",
+    phoneNumber:0,
     personalImage: "",
     pgLicence: "",
     acctype: "/owner",
@@ -466,7 +466,7 @@ export default function LoginPage() {
                 onChange={({ target }) => {
                   setOwnerDetails({
                     ...ownerDetials,
-                    phoneNumber: target.value,
+                    phoneNumber: parseInt(target.value),
                   });
                 }}
               />
