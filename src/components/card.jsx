@@ -50,6 +50,19 @@ const Card = () => {
     girls: false,
     both: false,
   });
+  
+  useEffect(() => {
+    
+    var temp =Object.keys(bedrooms).filter(key => bedrooms[key])
+    if(temp.length===0){
+      temp=["1BHK","2BHK","3BHK","4BHK","5BHK"]
+    }  
+    var temp1 =Object.keys(sharing).filter(key => sharing[key])
+    if(temp1.length===0){
+      temp1=[1,2,3]
+    }
+    setSelectedFilter({...selectedFilter,bedrooms:temp,sharing:temp1})
+  }, [bedrooms,sharing])
 
   const availableLabel = [
     {

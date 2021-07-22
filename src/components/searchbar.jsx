@@ -48,52 +48,6 @@ const SearchBar = ({
     country: "",
   });
 
-  // const [sharing, setSharing] = useState({
-  //   1: false,
-  //   2: false,
-  //   3: false,
-  // });
-  // const sharingLabel = [
-  //   {
-  //     name: 1,
-  //     key: 1,
-  //     label: "sharing",
-  //   },
-  //   {
-  //     name: 2,
-  //     key: 2,
-  //     label: "sharing",
-  //   },
-  //   {
-  //     name: 3,
-  //     key: 3,
-  //     label: "sharing",
-  //   },
-  // ];
-
-  // const [available, setAvailable] = useState({
-  //   boys: false,
-  //   girls: false,
-  //   both: false,
-  // });
-
-  // const availableLabel = [
-  //   {
-  //     name: "boys",
-  //     key: 1,
-  //     label: "avaibility",
-  //   },
-  //   {
-  //     name: "girls",
-  //     key: 2,
-  //     label: "avaibility",
-  //   },
-  //   {
-  //     name: "both",
-  //     key: 3,
-  //     label: "avaibility",
-  //   },
-  // ];
 
   useEffect(() => {
     axios({
