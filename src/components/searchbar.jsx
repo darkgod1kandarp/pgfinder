@@ -102,14 +102,8 @@ const SearchBar = ({
         setCity(res.data.city);
         setDisCity([...disCity, res.data.city]);
         console.log(res.data.city)
-        axios({
-          method:"post",
-          url:"http://localhost:5000/api/carddata",
-          data:res.data.city
-        }).then((res)=>{
-          console.log(res)
+        
         })
-      });
     });
   }, []);
   const Checkbox = ({ type = "checkbox", name, checked = false, onChange }) => {

@@ -94,7 +94,31 @@ const Card = () => {
   });
   
   const [searchCities, setSearchCities] = useState({});
-
+  useEffect(() => {
+    axios({
+      method: "GET",
+      url: "https://geolocation-db.com/json/fb363670-e22a-11eb-a464-59f706281067",
+      headers: {
+        accept: "application/json",
+        "content-type": "application/json",
+      },
+    }).then((res) => {
+      axios({
+        method: "get",
+        url: `http://ip-api.com/json/${res.data.IPv4}`,
+      }).then((res) => {
+        console.log(res, 1241345);
+        console.log(res.data.city)
+        axios({
+          method:"post",
+          url:"http://localhost:5000/api/carddata",
+          data:res.data.city
+        }).then((res)=>{
+          console.log(res)
+        })
+      });
+    });
+  }, []);
   useEffect(() => {
     
     var temp =Object.keys(bedrooms).filter(key => bedrooms[key])
@@ -238,7 +262,22 @@ const Card = () => {
               
               {console.log(selectedFilter)}
 
-            <Card1 handleClick={handleClick} slider={slider} setSlider={setSlider} data={data[0]  } image = {"image 0"} onClick={handleClick}/>
+
+            <Card1 handleClick={handleClick} slider={slider} setSlider={setSlider} data={data[0]  } image = {"image 0"} />
+            
+            <Card1 handleClick={handleClick} slider={slider} setSlider={setSlider} data={data[0]  } image = {"image 0"} />
+            
+            <Card1 handleClick={handleClick} slider={slider} setSlider={setSlider} data={data[0]  } image = {"image 0"} />
+            
+            <Card1 handleClick={handleClick} slider={slider} setSlider={setSlider} data={data[0]  } image = {"image 0"} />
+            
+            <Card1 handleClick={handleClick} slider={slider} setSlider={setSlider} data={data[0]  } image = {"image 0"} />
+            
+            <Card1 handleClick={handleClick} slider={slider} setSlider={setSlider} data={data[0]  } image = {"image 0"} />
+            
+            <Card1 handleClick={handleClick} slider={slider} setSlider={setSlider} data={data[0]  } image = {"image 0"} />
+            
+            <Card1 handleClick={handleClick} slider={slider} setSlider={setSlider} data={data[0]  } image = {"image 0"} />
             
             <Card1 handleClick={handleClick} slider={slider} setSlider={setSlider} data={data[1]} image={"image 1"}/>
           </div>

@@ -1,0 +1,59 @@
+.content{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.range{
+    display: flex;
+    justify-content: space-around;
+}
+.input{
+    padding: auto;
+}
+.title{
+    padding: 5px;
+    margin-top: 10px;
+    font-size: 1rem;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.00938em;
+}
+
+
+.bedrooms-checbox{
+    padding-left: 10px;
+    width: 250px;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.bedrooms--label{
+    max-width :30%;
+    width:100%
+}
+.filter{
+    width:340px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.filter:active{
+    border-radius: 10%;
+    box-shadow: 0px -2px 10px 5px rgba(0, 0, 0,0.2);
+   
+}
+
+.available--label{
+    max-width :30%;
+    width:100%
+}
+.available--checkbox{
+    padding-left: 10px;
+    width: 250px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+

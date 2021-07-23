@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Budget } from "./sliderCheckbox";
+import "./filtersidebar.scss";
 const FilterSideBar = ({
   sharing,
   available,
@@ -10,7 +11,7 @@ const FilterSideBar = ({
   selectedFilter,
   setSelectedFilter,
   setBedrooms,
-  bedrooms
+  bedrooms,
 }) => {
   // const [available, setAvailable] = useState({
   //   boys: false,
@@ -22,14 +23,14 @@ const FilterSideBar = ({
   //   min_budget: 0,
   //   max_area: "",
   //   min_area: "",
-    
+
   // });
 
-//   const useStyles = makeStyles({
-//     root: {
-//       width: 200,
-//     },
-//   });
+  //   const useStyles = makeStyles({
+  //     root: {
+  //       width: 200,
+  //     },
+  //   });
   // const availableLabel = [
   //   {
   //     name: "boys",
@@ -49,43 +50,53 @@ const FilterSideBar = ({
   // ];
   const Checkbox = ({ type = "checkbox", name, checked = false, onChange }) => {
     return (
-      <input type={type} name={name} checked={checked} onChange={onChange} />
+      <input
+        className="input"
+        type={type}
+        name={name}
+        checked={checked}
+        onChange={onChange}
+      />
     );
   };
-  const bedroomsLabel=[
+  const bedroomsLabel = [
     {
-      name:"1BHK",
-      key:1,
-      label:"no. of bedrooms"
+      name: "1BHK",
+      key: 1,
+      label: "no. of bedrooms",
     },
     {
-      name:"2BHK",
-      key:2,
-      label:"no. of bedrooms"
+      name: "2BHK",
+      key: 2,
+      label: "no. of bedrooms",
     },
     {
-      name:"3BHK",
-      key:3,
-      label:"no. of bedrooms"
+      name: "3BHK",
+      key: 3,
+      label: "no. of bedrooms",
     },
     {
-      name:"4BHK",
-      key:4,
-      label:"no. of bedrooms"
+      name: "4BHK",
+      key: 4,
+      label: "no. of bedrooms",
     },
     {
-      name:"5BHK",
-      key:4,
-      label:"no. of bedrooms"
+      name: "5BHK",
+      key: 5,
+      label: "no. of bedrooms",
     },
-  ]
-  const handleChangeBHK=(event)=>{
+    {
+      name: "+5BHK",
+      key: 6,
+      label: "no. of bedrooms",
+    },
+  ];
+  const handleChangeBHK = (event) => {
     setBedrooms({
       ...bedrooms,
       [event.target.name]: event.target.checked,
     });
-    
-  }
+  };
   const handleChange = (event) => {
     setAvailable({
       ...available,
@@ -95,47 +106,56 @@ const FilterSideBar = ({
   return (
     <div
       className=""
-      style={{ maxWidth: "300px", width: "100%", height: "100vh" }}
+      style={{
+        maxWidth: "380px",
+        width: "100%",
+        height: "100vh",
+        justifyContent: "center",
+      }}
     >
-      <div className="content" style={{ width: "300px" }}>
-        <div className="budget" style={{width:'300px'}}>
-        <Budget
-                selectedFilter={selectedFilter}
-                setSelectedFilter={setSelectedFilter}
-              />
+      <div className="content" style={{ width: "380px" }}>
+        <div className="budget filter" style={{ width: "340px" }}>
+          <Budget
+            selectedFilter={selectedFilter}
+            setSelectedFilter={setSelectedFilter}
+          />
+          <div className="range">
+            <p>min :{selectedFilter.min_budget} ₹</p>
+            <p>max :{selectedFilter.max_budget} ₹</p>
+          </div>
         </div>
-        <div className="bedrooms">
-          {
-            bedroomsLabel.map((item,i)=>(
-              <label key={item.key}>
-              {item.name}
-              <Checkbox
-                name={item.name}
-                checked={bedrooms[item.name]}
-                onChange={handleChangeBHK}
-              />
-            </label>
-            ))
+        <div className="bedroom filter">
+          <div className="title">No. of Bedrooms</div>
 
-          }
-    {console.log(bedrooms)}
-
+          <div className="bedrooms-checbox">
+            {bedroomsLabel.map((item, i) => (
+              <label className="bedrooms--label" key={item.key}>
+                <Checkbox
+                  name={item.name}
+                  checked={bedrooms[item.name]}
+                  onChange={handleChangeBHK}
+                />
+                {item.name}
+              </label>
+            ))}
+            {console.log(bedrooms)}
+          </div>
         </div>
-        <div className="avaibility">
-          {availableLabel.map((item) => (
-            <label key={item.key}>
-              {item.name}
-              <Checkbox
-                name={item.name}
-                checked={available[item.name]}
-                onChange={handleChange}
-              />
-            </label>
-          ))}
-        </div>
-
-        <div className="sharing">
-          
+        <div className="available filter">
+          <div className="title">Avaibility</div>
+          <div className="available--checkbox">
+            {availableLabel.map((item) => (
+              <label className="available--label" key={item.key}>
+                <Checkbox
+                  name={item.name}
+                  checked={available[item.name]}
+                  onChange={handleChange}
+                />
+                {item.name}
+           
+              </label>
+            ))}
+          </div>
         </div>
       </div>
     </div>

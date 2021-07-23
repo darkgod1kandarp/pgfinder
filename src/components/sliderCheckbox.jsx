@@ -37,7 +37,7 @@ export  const Budget = ({selectedFilter,setSelectedFilter}) =>
     }
 
 
-    const [value, setValue] = React.useState([20, 37]);
+    const [value, setValue] = React.useState([0, 100]);
 
     const handleChange = (event, newValue) => {
       setValue(newValue);

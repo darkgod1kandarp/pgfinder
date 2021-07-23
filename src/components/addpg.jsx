@@ -182,6 +182,7 @@ const AddPg = () => {
         await axios({
           method: "post",
           url: "http://localhost:5000/api/checking",
+          
           headers: { Authorization: jwt },
         })
           .then(async (res) => {

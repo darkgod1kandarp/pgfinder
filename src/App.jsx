@@ -18,7 +18,7 @@ import Imageslider from "./components/Imagelider";
 import SearchLocationInput from "./components/location";
 import Main from "./components/login/main";
 import PgLogin from "./components/pglogin";
-
+import DetailedCard from "./components/detailsCard";
 import AddPg from "./components/addpg";
 export default function App() {
   // const [details, setDetails] = React.useState({
@@ -55,7 +55,7 @@ export default function App() {
         <Route path ="/card" component={Card}></Route>
         <Route path="/slider" component={Imageslider}></Route>
         <Route path="/owner" component={AddPg}></Route>
-        
+        <Route path='/details/:name/:pgid' component={DetailedCard}></Route>
       <Route exact path ="/" component = {LoginPage}></Route>
 
       

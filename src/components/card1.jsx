@@ -1,11 +1,14 @@
 import React from "react";
 import { useState } from "react";
 import Slider from './slider';
+import { History } from "history";
+import { useHistory } from "react-router-dom";
 
 // import Imageslider from "./?Imagelider";
-import "./card1.scss";
 const Card1 = ({ data ,handleClick,slider,setSlider,image }) => {
-  
+  const history =useHistory()
+  const name="owner"
+  const pgid="21312312452t1351"
   return (
     <div className="">
       
@@ -28,7 +31,9 @@ const Card1 = ({ data ,handleClick,slider,setSlider,image }) => {
 
             <div className="pg__linkcontainer pg--padding">
               <p className="pg--price ">₹7000</p>
-
+              <button onClick={()=>{
+                history.push(`details/${name}/${pgid}/`)
+              }}>veiw more</button>
               <a href="" className="pg--link">
                 View map
               </a>
