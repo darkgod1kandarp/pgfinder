@@ -139,7 +139,6 @@ const FilterSideBar = ({
   //     label: "avaibility",
   //   },
   // ];
-  console.log(selectedFilter)
   const Checkbox = ({ type = "checkbox", name, checked = false, onChange }) => {
     return (
       <input
@@ -244,7 +243,6 @@ const FilterSideBar = ({
                 {item.name}
               </label>
             ))}
-            {console.log(bedrooms)}
           </div>
         </div>
         <div className="available filter">

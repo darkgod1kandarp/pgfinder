@@ -48,7 +48,6 @@ const SearchBar = ({
   //   min_area: "",
   // });
   const [disCity, setDisCity] = useState([]);
-  console.log(disCity);
   //
   // const [searchCities, setSearchCities] = useState({});
 
@@ -188,9 +187,6 @@ const SearchBar = ({
     setAddress(value);
     setCoordinates(latLng);
   };
-  useEffect(() => {
-    console.log(selectedFilter);
-  }, [selectedFilter]);
 
   return (
     <div className="" >

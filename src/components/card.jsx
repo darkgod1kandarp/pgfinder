@@ -22,7 +22,7 @@ const Card = () => {
         
         setLoc({userlat:location.latitude,userLng:location.longitude})
     }, [location])
-    console.log(loc,"qwertyu")
+    // console.log(loc,"qwertyu")
     // console.log(location,123)
   React.useEffect(() => {
     
@@ -239,7 +239,6 @@ const Card = () => {
               apply={apply}
             />
     </div>
-            {console.log(selectedFilter)}
             <div className="sd">
              
              {
