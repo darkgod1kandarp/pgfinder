@@ -17,7 +17,7 @@ const Slider = ({ images, length1, setSlider }) => {
   const [state, setState] = useState(true);
   const initialState = { height: 100, width: 500 };
   const [settingimage, setSettingImage] = useState(
-    images[0].url
+    images[0].imgurl
   );
    const[imageHeigth,setImageHeight] = useState("100%");
   const [middleHeight, setMiddleHeight] = useState("550px");
@@ -137,7 +137,7 @@ const Slider = ({ images, length1, setSlider }) => {
                 <div className="image">
                   <img
                     className="image1"
-                    src={object.url}
+                    src={object.imgurl}
                     alt="none"
                     onClick={({ target }) => setSettingImage(target.src)
                   }

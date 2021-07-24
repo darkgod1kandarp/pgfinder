@@ -38,10 +38,12 @@ const AddPg = () => {
   };
 
   const handleDeleteLocationTag = ({ target }) => {
-    setList(
+    setLocationList(
       locationList.filter((element, index) => index !== parseInt(target.id))
     );
+
   };
+ 
 
   const history = useHistory();
   const [address, setAddress] = React.useState("");
@@ -78,7 +80,7 @@ const AddPg = () => {
   }, [address]);
   const servicesList = [
     {
-      name: "food services",
+      name: "jain food",
       key: 1,
       label: "facilities",
     },
@@ -88,7 +90,7 @@ const AddPg = () => {
       label: "facilities",
     },
     {
-      name: "attched washroom/bathroom",
+      name: "attched washroom",
       key: 3,
       label: "facilities",
     },
@@ -103,7 +105,7 @@ const AddPg = () => {
       label: "facilities",
     },
     {
-      name: "room cleaning service",
+      name: "room cleaning",
       key: 6,
       label: "facilities",
     },
@@ -150,11 +152,29 @@ const AddPg = () => {
       return { ...pgDetails, address: value };
     });
     setPgDetails({ ...pgDetails, ...latLng });
-    console.log(typeof latLng.lat);
 
     setAddress(value);
     setCoordinates(latLng);
   };
+
+  const [cusService,setCusService]=useState("")
+  const [customArr,setCustomArr]=useState([])
+  const removeService=({target})=>{
+    setCustomArr(
+        customArr.filter((element,index)=>index !== parseInt(target.id))
+    )
+  }
+  let servicesarr
+  useEffect(() => {
+    
+    servicesarr = Object.keys(services).filter((key) => services[key]);
+    
+    console.log(servicesarr.concat(customArr,123))
+    
+    setPgDetails({...pgDetails,service:servicesarr.concat(customArr)})
+    
+  }, [services,customArr])
+  console.log(pgDetails.service)
   React.useEffect(() => {
     const data = JSON.parse(localStorage.getItem("data"));
 
@@ -202,6 +222,8 @@ const AddPg = () => {
       <input type={type} name={name} checked={checked} onChange={onChange} />
     );
   };
+  
+
   const handleChange = (event) => {
     setServices({
       ...services,
@@ -231,7 +253,6 @@ const AddPg = () => {
     });
   };
   const [locationList, setLocationList] = useState([]);
-  const [location, setLocation] = useState();
   const Adddetails = async () => {
     console.log(123, uuidv4(10));
     console.log(services, 123);
@@ -239,8 +260,8 @@ const AddPg = () => {
     // const id = await uuidv4(5);
     // console.log(id);
     // setPgDetails({ ...pgDetails, pgid: id });
-
-    pgDetails.services.push(services);
+    
+    // pgDetails.services.push(services);
     pgDetails.imgData.push(imgData);
     pgDetails.imgList.push(imgList);
     pgDetails.rule.push(list);
@@ -440,6 +461,7 @@ const AddPg = () => {
               >
                 both
               </button>
+              
             </div>
             <div className="services">
               {servicesList.map((item) => (
@@ -452,35 +474,34 @@ const AddPg = () => {
                   />
                 </label>
               ))}
+             
             </div>
-            <div className="location">
-              <input
-                type="text"
-                value={location}
-                onChange={({ target }) => {
-                  setLocation(target.value);
-                  console.log(target.value);
-                }}
-              />
-              <button
-                onClick={() => {
-                  if (location !== "" && locationList.length < 5) {
-                    setList([...locationList, location]);
-                    setLocation("");
+           <div className="custom service">
+           <div className="">
+
+                  {
+                    customArr.map((ser,i)=>(
+                      <div className="">
+                          <label htmlFor="">{ser}</label>
+                          <button id={i} onClick={removeService}>X</button>
+
+                      </div>
+                    ))
                   }
-                }}
-              >
-                addLocation Tags
-              </button>
-              {locationList.map((location, i) => (
-                <>
-                  <p>{location}</p>
-                  <button id={i} onClick={handleDeleteLocationTag}>
-                    X
-                  </button>
-                </>
-              ))}
-            </div>
+
+                <input type="text" value={cusService} onChange={({target})=>{
+                    setCusService(target.value)
+
+                }}/>
+                <button onClick={()=>{
+                  if(cusService!==""){
+                    setCustomArr([...customArr,cusService])
+                    console.log(customArr)
+                    setCusService("")
+                  }
+                }}>addService</button>
+              </div>
+           </div>
 
             <div className="rule">
               <input

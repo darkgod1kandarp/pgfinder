@@ -2,30 +2,15 @@ import React, { useState, useEffect } from "react";
 import Slider from "./slider";
 import "./box.css";
 import SearchBar from "./searchbar";
-import useGeolocation from "react-hook-geolocation";
-
 import { useHistory } from "react-router-dom";
-import Card1 from "./card1";
+import "./cardPage.scss";
 import axios from "axios";
+import Card1 from "./card1";
 import FilterSideBar from "./filterSiderbar";
-const Card = () => {
+const CardPage = () => {
   const history = useHistory();
-    const [cardData,setCardData]=useState()
-    const [cardDataKeys,setCardDataKeys]=useState([])
-    const location = useGeolocation();
-    const [loc,setLoc]=useState({
-      userlat:0,
-      userLng:0
-    })
 
-    useEffect(() => {
-        
-        setLoc({userlat:location.latitude,userLng:location.longitude})
-    }, [location])
-    console.log(loc,"qwertyu")
-    // console.log(location,123)
   React.useEffect(() => {
-    
     const data = JSON.parse(localStorage.getItem("data"));
 
     const checkingIfTheLocalStorageHaveTheDataOrNot =
@@ -102,7 +87,6 @@ const Card = () => {
     },
   ];
 
- 
   const [available, setAvailable] = useState({
     boys: false,
     girls: false,
@@ -128,22 +112,13 @@ const Card = () => {
         axios({
           method: "post",
           url: "http://localhost:5000/api/carddata",
-          data: {city:res.data.city,lat:res.data.lat,lon:res.data.lon}
+          data: res.data.city,
         }).then((res) => {
-          setCardData({...res.data.data})
-          console.log(res,"qwe");
-          // console.log(cardData)
+          console.log(res);
         });
       });
     });
   }, []);
-  useEffect(() => {
-    if(cardData===undefined){return}
-    setCardDataKeys([Object.keys(cardData)])
-    console.log(cardDataKeys,21)
-
-    
-  }, [cardData])
   useEffect(() => {
     var temp = Object.keys(bedrooms).filter((key) => bedrooms[key]);
     if (temp.length === 0) {
@@ -186,7 +161,53 @@ const Card = () => {
     },
   ];
 
-  
+  const data = [
+    {
+      images: [
+        {
+          url: "https://www.howtogeek.com/wp-content/uploads/2018/06/shutterstock_1006988770.png?height=200p&trim=2,2,2,2",
+        },
+        {
+          url: "https://www.howtogeek.com/wp-content/uploads/2018/06/shutterstock_1006988770.png?height=200p&trim=2,2,2,2",
+        },
+        {
+          url: "https://www.howtogeek.com/wp-content/uploads/2018/06/shutterstock_1006988770.png?height=200p&trim=2,2,2,2",
+        },
+        {
+          url: "https://images.theconversation.com/files/350865/original/file-20200803-24-50u91u.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop",
+        },
+        {
+          url: "https://www.howtogeek.com/wp-content/uploads/2018/06/shutterstock_1006988770.png?height=200p&trim=2,2,2,2",
+        },
+        {
+          url: "https://www.howtogeek.com/wp-content/uploads/2018/06/shutterstock_1006988770.png?height=200p&trim=2,2,2,2",
+        },
+        {
+          url: "https://images.theconversation.com/files/350865/original/file-20200803-24-50u91u.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop",
+        },
+        {
+          url: "https://www.howtogeek.com/wp-content/uploads/2018/06/shutterstock_1006988770.png?height=200p&trim=2,2,2,2",
+        },
+      ],
+    },
+    {
+      images: [
+        {
+          url: "https://www.howtogeek.com/wp-content/uploads/2018/06/shutterstock_1006988770.png?height=200p&trim=2,2,2,2",
+        },
+        {
+          url: "https://www.howtogeek.com/wp-content/uploads/2018/06/shutterstock_1006988770.png?height=200p&trim=2,2,2,2",
+        },
+        {
+          url: "https://images.theconversation.com/files/350865/original/file-20200803-24-50u91u.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop",
+        },
+        {
+          url: "https://www.howtogeek.com/wp-content/uploads/2018/06/shutterstock_1006988770.png?height=200p&trim=2,2,2,2",
+        },
+      ],
+    },
+  ];
+
   const [state, setState] = useState(true);
 
   const [slider, setSlider] = useState(false);
@@ -198,85 +219,51 @@ const Card = () => {
   };
 
   return (
-    <>
-    
-      {state && !slider ? (
-        <div className="App1">
-          <div className="part1 sidebar">
-            <div className="querybox">
-              <FilterSideBar
-                setSharing={setSharing}
-                setAvailable={setAvailable}
-                available={available}
-                sharing={sharing}
-                availableLabel={availableLabel}
-                sharingLabel={sharingLabel}
-                setSelectedFilter={setSelectedFilter}
-                selectedFilter={selectedFilter}
-                bedrooms={bedrooms}
-                setBedrooms={setBedrooms}
-                
-              />
-            </div>
-          </div>
-
-          <div className="part1 grid">
-            <div className="" style={{marginBottom:"10px"}}>
-            <SearchBar
-            
+    <div className="main">
+      <div className="main--sidebar">
+        <FilterSideBar
+          setSharing={setSharing}
+          setAvailable={setAvailable}
+          available={available}
+          sharing={sharing}
+          availableLabel={availableLabel}
+          sharingLabel={sharingLabel}
+          setSelectedFilter={setSelectedFilter}
+          selectedFilter={selectedFilter}
+          bedrooms={bedrooms}
+          setBedrooms={setBedrooms}
+        />
+      </div>
+      <div className="main--content">
+        <div className="main--content--searchbar">
+          <SearchBar
             setSharing={setSharing}
-              setAvailable={setAvailable}
-              available={available}
-              sharing={sharing}
-              availableLabel={availableLabel}
-              sharingLabel={sharingLabel}
-              setSelectedFilter={setSelectedFilter}
-              selectedFilter={selectedFilter}
-              searchCities={searchCities}
-              setSearchCities={setSearchCities}
-              bedrooms={bedrooms}
-              setBedrooms={setBedrooms}
-              apply={apply}
-            />
-    </div>
-            {console.log(selectedFilter)}
-            <div className="sd">
-             
-             {
-             cardDataKeys.length!==0 &&
-             
-             cardDataKeys[0].map((data,i)=>(
-               
-               
-               <div className="">
-                   <Card1
+            setAvailable={setAvailable}
+            available={available}
+            sharing={sharing}
+            availableLabel={availableLabel}
+            sharingLabel={sharingLabel}
+            setSelectedFilter={setSelectedFilter}
+            selectedFilter={selectedFilter}
+            searchCities={searchCities}
+            setSearchCities={setSearchCities}
+            bedrooms={bedrooms}
+            setBedrooms={setBedrooms}
+            apply={apply}
+          />
+        </div>
+        <div className="main--content--card">
+        <Card1
                 handleClick={handleClick}
                 slider={slider}
                 setSlider={setSlider}
-                data={cardData[data]}
-                image={`pg--image-i ${i}`}
-                loc={loc}
+                data={data[0]}
+                image={"image 0"}
               />
-                 
-               </div>
-             ))}
-             
-             
-            </div>
-          </div>
         </div>
-      ) : (
-        <div>
-          {console.log(cardData[cardDataKeys[0][value]].url,"123we13r")}
-          <Slider
-            images={cardData[cardDataKeys[0][value]].url}
-            length1={cardData[cardDataKeys[0][value]].url.length * 82}
-            setSlider={setSlider}
-          />
-        </div>
-      )}
-    </>
+      </div>
+    </div>
   );
 };
 
-export default Card;
+export default CardPage;

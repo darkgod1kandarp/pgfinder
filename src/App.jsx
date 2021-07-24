@@ -20,6 +20,9 @@ import Main from "./components/login/main";
 import PgLogin from "./components/pglogin";
 import DetailedCard from "./components/detailsCard";
 import AddPg from "./components/addpg";
+import Map from "./components/map";
+// import CardPage from "./components/cardPage";
+import Direction from "./components/component";
 export default function App() {
   // const [details, setDetails] = React.useState({
   //   name: "",
@@ -40,7 +43,7 @@ export default function App() {
     <div className="">
       <BrowserRouter><Switch>
         
-        
+        {/* <Route path="/" component={CardPage}></Route> */}
         <Route path="/login"  component={LoginPage}></Route>
         <Route path="/home" component={Register}></Route>
         <Route path="/dashboard" component={Dashboard}></Route>
@@ -55,6 +58,7 @@ export default function App() {
         <Route path ="/card" component={Card}></Route>
         <Route path="/slider" component={Imageslider}></Route>
         <Route path="/owner" component={AddPg}></Route>
+        <Route path="/map" component={Map}></Route>
         <Route path='/details/:name/:pgid' component={DetailedCard}></Route>
       <Route exact path ="/" component = {LoginPage}></Route>
 

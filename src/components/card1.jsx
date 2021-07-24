@@ -1,54 +1,79 @@
 import React from "react";
-import { useState } from "react";
-import Slider from './slider';
+import { useState,useEffect } from "react";
+import Slider from "./slider";
 import { History } from "history";
 import { useHistory } from "react-router-dom";
-
+import "./card1.scss"
 // import Imageslider from "./?Imagelider";
-const Card1 = ({ data ,handleClick,slider,setSlider,image }) => {
-  const history =useHistory()
-  const name="owner"
-  const pgid="21312312452t1351"
+const Card1 = ({ data, handleClick,loc, slider, pg, image ,setViewmore}) => {
+  const history = useHistory();
+  const name = "owner";
+  const pgid = "21312312452t1351";
+
+  const [map,setMap] =useState(false)
+ 
+  console.log(loc)
+  const pglocation = { lat: data.lat, lng: data.lng };
+  console.log(data,"card1")
   return (
     <div className="">
-      
       {!slider && (
-        <div className="pg" style={{border:'1px solid rgba(0, 0, 0, 0.05)' , width:"max-content",Padding:"10px"}}>
-          <div className="pg__img">
+        <div class="pg--card">
+          <div class="pg--image">
             <img
-              src="https://images.unsplash.com/photo-1590212151175-e58edd96185b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=751&q=80"
+              src={data.url[0].imgurl}
               alt=".."
+              width="180px"
+              height="220px"
               onClick={handleClick}
               className={image}
-              height="150px"
-              width="150px"
+
             />
           </div>
-          <div className="pg__content">
-            <p className="pg--heading pg--padding">Vamos' 21</p>
-            <p className="pgf--date  pg--padding">Facclities</p>
-            <p className="pg--venue pg--padding">A.R.A, Ahmedabad</p>
+          <div class="pg--content">
+            <div class="pg--name">
+              <p class="pg--name--text">{data.pgname}</p>
+            </div>
 
-            <div className="pg__linkcontainer pg--padding">
-              <p className="pg--price ">₹7000</p>
-              <button onClick={()=>{
-                history.push(`details/${name}/${pgid}/`)
-              }}>veiw more</button>
-              <a href="" className="pg--link">
-                View map
-              </a>
+            <div class="pg--property-value">
+              <p class="pg--property">cost per bed</p>
+              <p class="pg--value">{data.costperbed}</p>
+            </div>
+
+            <div class="pg--property-value">
+              <p class="pg--property">Suitable</p>
+              <p class="pg--value">{data.availability}</p>
+            </div>
+            <div class="pg--property-value">
+              <p class="pg--property">Available Rooms</p>
+              <p class="pg--value">{data.roomsforrent}</p>
+            </div>
+
+            <div class="pg--property-value">
+              <p class="pg--property">sharing per Rooms</p>
+              <p class="pg--value">{data.sharing}</p>
+            </div>
+            <div class="pg--property-value">
+              <p class="pg--property">Address</p>
+              <p class="pg--value">
+                      {data.address}
+              </p>
+            </div>
+            <div class="pg--btn-class">
+              <button class="btn">Veiw More</button>
+              <button class={pg} onClick={() => {
+                  history.push({
+                    pathname:"/map",
+                    state:{...loc,...pglocation}
+                  })
+
+}}>Veiw Map</button>
             </div>
           </div>
         </div>
       )}
-      {slider && 
-      <div className="">
-          {console.log(data.images)}    
-          <button onClick={()=>{setSlider(false)}}>X</button>
 
-      </div>
-      }
-
+      
     </div>
   );
 };

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Budget } from "./sliderCheckbox";
+import React, { useState,useEffect } from "react";
+import { Budget, Area } from "./sliderCheckbox";
 import "./filtersidebar.scss";
 const FilterSideBar = ({
   sharing,
@@ -13,6 +13,96 @@ const FilterSideBar = ({
   setBedrooms,
   bedrooms,
 }) => {
+
+  const servicesList = [
+    {
+      name: "food services",
+      key: 1,
+      label: "facilities",
+    },
+    {
+      name: "AC",
+      key: 2,
+      label: "facilities",
+    },
+    {
+      name: "attched washroom",
+      key: 3,
+      label: "facilities",
+    },
+    {
+      name: "Wifi",
+      key: 4,
+      label: "facilities",
+    },
+    {
+      name: "personal cupboard",
+      key: 5,
+      label: "facilities",
+    },
+    {
+      name: "room cleaning",
+      key: 6,
+      label: "facilities",
+    },
+
+    {
+      name: "TV",
+      key: 7,
+      label: "facilities",
+    },
+
+    {
+      name: "parking",
+      key: 8,
+      label: "facilities",
+    },
+    {
+      name: "furnished",
+      key: 9,
+      label: "facilities",
+    },
+    {
+      name: "laundry",
+      key: 10,
+      label: "facilities",
+    },
+    {
+      name: "wardern",
+      key: 11,
+      label: "facilities",
+    },
+    {
+      name: "security",
+      key: 12,
+      label: "facilities",
+    },
+  ];
+
+  const [services, setServices] = useState({
+    "jain food": false,
+    AC: false,
+    "attched washroom": false,
+    Wifi: false,
+    "personal cupboard": false,
+    "room cleaning service": false,
+    TV: false,
+    parking: false,
+    furnished: false,
+    laundry: false,
+    wardern: false,
+    security: false,
+  });
+  const handleChangeService = (event) => {
+    setServices({
+      ...services,
+      [event.target.name]: event.target.checked,
+    });
+  };
+  useEffect(() => {
+    const temp= Object.keys(services).filter((key) => services[key])
+    setSelectedFilter({...selectedFilter,service:temp})
+  }, [services])
   // const [available, setAvailable] = useState({
   //   boys: false,
   //   girls: false,
@@ -48,6 +138,7 @@ const FilterSideBar = ({
   //     label: "avaibility",
   //   },
   // ];
+  console.log(selectedFilter)
   const Checkbox = ({ type = "checkbox", name, checked = false, onChange }) => {
     return (
       <input
@@ -85,12 +176,14 @@ const FilterSideBar = ({
       key: 5,
       label: "no. of bedrooms",
     },
-    {
-      name: "+5BHK",
-      key: 6,
-      label: "no. of bedrooms",
-    },
   ];
+
+  const handleChangeSharing = (event) => {
+    setSharing({
+      ...sharing,
+      [event.target.name]: event.target.checked,
+    });
+  };
   const handleChangeBHK = (event) => {
     setBedrooms({
       ...bedrooms,
@@ -113,8 +206,8 @@ const FilterSideBar = ({
         justifyContent: "center",
       }}
     >
-      <div className="content" style={{ width: "380px" }}>
-        <div className="budget filter" style={{ width: "340px" }}>
+      <div className="content" style={{ width: "380px" ,height:"maxContent" }}>
+        <div className="budget filter">
           <Budget
             selectedFilter={selectedFilter}
             setSelectedFilter={setSelectedFilter}
@@ -124,12 +217,24 @@ const FilterSideBar = ({
             <p>max :{selectedFilter.max_budget} ₹</p>
           </div>
         </div>
+
+        <div className="area filter">
+          <Area
+            selectedFilter={selectedFilter}
+            setSelectedFilter={setSelectedFilter}
+          />
+          <div className="range">
+            <p>min :{selectedFilter.min_area} sq.ft</p>
+            <p>max :{selectedFilter.max_area} sq.ft</p>
+          </div>
+        </div>
+
         <div className="bedroom filter">
           <div className="title">No. of Bedrooms</div>
 
-          <div className="bedrooms-checbox">
+          <div className="bedrooms-checbox checkbox">
             {bedroomsLabel.map((item, i) => (
-              <label className="bedrooms--label" key={item.key}>
+              <label className="bedrooms--label label" key={item.key}>
                 <Checkbox
                   name={item.name}
                   checked={bedrooms[item.name]}
@@ -143,19 +248,54 @@ const FilterSideBar = ({
         </div>
         <div className="available filter">
           <div className="title">Avaibility</div>
-          <div className="available--checkbox">
+          <div className="available--checkbox checkbox">
             {availableLabel.map((item) => (
-              <label className="available--label" key={item.key}>
+              <label className="available--label label" key={item.key}>
                 <Checkbox
                   name={item.name}
                   checked={available[item.name]}
                   onChange={handleChange}
                 />
                 {item.name}
-           
               </label>
             ))}
           </div>
+        </div>
+
+        <div className="sharing filter">
+          <div className="title">Sharing Per Room</div>
+          <div className="checkbox">
+            {sharingLabel.map((item) => (
+              <label className="label" key={item.key}>
+                <Checkbox
+                  name={item.name}
+                  checked={sharing[item.name]}
+                  onChange={handleChangeSharing}
+                />
+                {item.name}
+              </label>
+            ))}
+          </div>
+        </div>
+        <div className="services filter">
+          <div className="title">services</div>
+          <div className="checkbox">
+              {servicesList.map((item) => (
+                <label className="label" key={item.key}>
+                  <Checkbox
+                    name={item.name}
+                    checked={services[item.name]}
+                    onChange={handleChangeService}
+                  />
+                  {item.name}
+               
+                </label>
+              ))}
+             
+            </div>
+        </div>
+        <div className="">
+          <button className="apply">Apply</button>
         </div>
       </div>
     </div>

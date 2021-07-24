@@ -4,6 +4,7 @@ import PlacesAutocomplete, {
   getLatLng,
 } from "react-places-autocomplete";
 import useGeolocation from "react-hook-geolocation";
+import "./searchbar.scss";
 import { Budget, Area, AvailableFor } from "./sliderCheckbox";
 import axios from "axios";
 const SearchBar = ({
@@ -11,7 +12,7 @@ const SearchBar = ({
   available,
   setSharing,
   setAvailable,
-  availableLabel,                                
+  availableLabel,
   sharingLabel,
   selectedFilter,
   setSelectedFilter,
@@ -19,14 +20,22 @@ const SearchBar = ({
   setSearchCities,
   bedrooms,
   setBedrooms,
-  apply
-
+  apply,
 }) => {
   const [address, setAddress] = React.useState("");
   const [coordinates, setCoordinates] = React.useState({
     lat: null,
     lng: null,
   });
+
+  const handleDeleteTag = ({ target }) => {
+    console.log(target.id)
+    const a=disCity[target.id]
+    console.log(a)
+    
+    delete searchCities[a]
+    setDisCity(disCity.filter((element, index) => index !== parseInt(target.id)));
+  };
   // const geolocation=useGeolocation()
   // console.log(geolocation)
 
@@ -39,7 +48,7 @@ const SearchBar = ({
   //   min_area: "",
   // });
   const [disCity, setDisCity] = useState([]);
-  console.log(disCity)
+  console.log(disCity);
   //
   // const [searchCities, setSearchCities] = useState({});
 
@@ -51,40 +60,39 @@ const SearchBar = ({
     country: "",
   });
 
-  const bedroomsLabel=[
+  const bedroomsLabel = [
     {
-      name:"1BHK",
-      key:1,
-      label:"no. of bedrooms"
+      name: "1BHK",
+      key: 1,
+      label: "no. of bedrooms",
     },
     {
-      name:"2BHK",
-      key:2,
-      label:"no. of bedrooms"
+      name: "2BHK",
+      key: 2,
+      label: "no. of bedrooms",
     },
     {
-      name:"3BHK",
-      key:3,
-      label:"no. of bedrooms"
+      name: "3BHK",
+      key: 3,
+      label: "no. of bedrooms",
     },
     {
-      name:"4BHK",
-      key:4,
-      label:"no. of bedrooms"
+      name: "4BHK",
+      key: 4,
+      label: "no. of bedrooms",
     },
     {
-      name:"5BHK",
-      key:4,
-      label:"no. of bedrooms"
+      name: "5BHK",
+      key: 5,
+      label: "no. of bedrooms",
     },
-  ]
-  const handleChangeBHK=(event)=>{
+  ];
+  const handleChangeBHK = (event) => {
     setBedrooms({
       ...bedrooms,
       [event.target.name]: event.target.checked,
     });
-    
-  }
+  };
   useEffect(() => {
     axios({
       method: "GET",
@@ -100,12 +108,13 @@ const SearchBar = ({
       }).then((res) => {
         console.log(res, 1241345);
         setCity(res.data.city);
-        setDisCity([...disCity, res.data.city]);
-        console.log(res.data.city)
-        
-        })
+        if (disCity[0] !== res.data.city) {
+          setDisCity([...disCity, res.data.city]);
+        }
+        console.log(res.data.city);
+      });
     });
-  }, []);
+  }, [available]);
   const Checkbox = ({ type = "checkbox", name, checked = false, onChange }) => {
     return (
       <input type={type} name={name} checked={checked} onChange={onChange} />
@@ -184,8 +193,8 @@ const SearchBar = ({
   }, [selectedFilter]);
 
   return (
-    <div className="">
-      <button
+    <div className="" >
+      {filterPopUp && <button
         style={{ zIndex: "10" }}
         onClick={() => {
           setFilterPopUp(false);
@@ -193,39 +202,30 @@ const SearchBar = ({
         }}
       >
         X
-      </button>
-      <div className="">as</div>
+      </button>}
       <div
         className="searchbar"
         onClick={() => {
           setFilterPopUp(true);
         }}
+        
       >
-        <label htmlFor="">search here</label>l
+        {!filterPopUp &&         
+        <label htmlFor="" className="searchlabel">search here</label>}
         {filterPopUp && (
           <div
-            className="filter"
-            style={{
-              position: "absolute",
-              order: "top",
-              width: "100vw",
-              backgroundColor: "white",
-              boxShadow: "5px 10px #888888",
-              padding: "1rem",
-            }}
+            className="filterpop"
+        
           >
             {disCity.map((city, i) => (
               <div className="">
-                <label id={i} htmlFor="">
+                <label className="city-header" id={i} htmlFor="">
                   {city}
+                  <button id={i} onClick={handleDeleteTag}>x</button>
                 </label>
               </div>
             ))}
             {console.log(disCity)}
-            <div
-              className="buttonwrap"
-              style={{ display: "flex", flexWrap: "wrap" }}
-            ></div>
 
             <div className="inputsection">
               <PlacesAutocomplete
@@ -241,6 +241,7 @@ const SearchBar = ({
                 }) => (
                   <div>
                     <input
+                      className="Ginput"
                       {...getInputProps({ placeholder: "Google Search" })}
                     />
 
@@ -252,10 +253,13 @@ const SearchBar = ({
                           backgroundColor: suggestion.active
                             ? "#41b6e6"
                             : "#fff",
+                          width: "780px",
+                          marginLeft: "10px",
                         };
 
                         return (
                           <div
+                            className="sugestions"
                             {...getSuggestionItemProps(suggestion, { style })}
                           >
                             {suggestion.description}
@@ -268,9 +272,9 @@ const SearchBar = ({
               </PlacesAutocomplete>
             </div>
 
-            <div className="budget">
+            <div className="btn-Selector">
               <button
-                className="selctor"
+                className="selector"
                 onClick={() => {
                   if (filterType === "budget") {
                     setFilterType("");
@@ -279,16 +283,8 @@ const SearchBar = ({
                   }
                 }}
               >
-                budget
+                Budget
               </button>
-              {filterType === "budget" && (
-                <Budget
-                  selectedFilter={selectedFilter}
-                  setSelectedFilter={setSelectedFilter}
-                />
-              )}
-            </div>
-            <div className="area">
               <button
                 className="selector"
                 onClick={() => {
@@ -301,14 +297,6 @@ const SearchBar = ({
               >
                 Area
               </button>
-              {filterType === "Area" && (
-                <Area
-                  selectedFilter={selectedFilter}
-                  setSelectedFilter={setSelectedFilter}
-                />
-              )}
-            </div>
-            <div className="avaibility">
               <button
                 className="selector"
                 onClick={() => {
@@ -319,26 +307,20 @@ const SearchBar = ({
                   }
                 }}
               >
-                aviability
+                Avaibility
               </button>
-
-              {filterType === "avaible" && (
-                <div className="">
-                  {availableLabel.map((item) => (
-                    <label key={item.key}>
-                      {item.name}
-                      <Checkbox
-                        name={item.name}
-                        checked={available[item.name]}
-                        onChange={handleChange}
-                      />
-                    </label>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            <div className="sharing">
+              <button
+                className="selector"
+                onClick={() => {
+                  if (filterType === "bedroom") {
+                    setFilterType("");
+                  } else {
+                    setFilterType("bedroom");
+                  }
+                }}
+              >
+                No. Of Bedrooms
+              </button>
               <button
                 className="selector"
                 onClick={() => {
@@ -349,61 +331,102 @@ const SearchBar = ({
                   }
                 }}
               >
-                sharing
+                Sharing
               </button>
-
-              {filterType==="sharing" && 
-              <div className="">
-                
-                  {sharingLabel.map((item) => (
-                    <label key={item.key}>
-                      {item.name}
-                      <Checkbox
-                        name={item.name}
-                        checked={sharing[item.name]}
-                        onChange={handleChangeSharing}
-                      />
-                    </label>
-                  ))}
-                
-              </div>
-              }
-            </div>
-            <div className="bedrooms">
-            <button
-                className="selector"
-                onClick={() => {
-                  if (filterType === "bedroom") {
-                    setFilterType("");
-                  } else {
-                    setFilterType("bedroom");
-                  }
-                }}
-              >
-                bedroom
-              </button>
-
-            {
-              filterType==="bedroom" && 
-              <div className="">
-            {bedroomsLabel.map((item,i)=>(
-              <label key={item.key}>
-              {item.name}
-              <Checkbox
-                name={item.name}
-                checked={bedrooms[item.name]}
-                onChange={handleChangeBHK}
-              />
-            </label>
-            ))}
-            </div>
-          }
-          
             </div>
 
-            <div className="">
+            <div className="budget filterPopup">
+              {filterType === "budget" && (
+                <div className="budget pop">
+                  <Budget
+                    selectedFilter={selectedFilter}
+                    setSelectedFilter={setSelectedFilter}
+                  />
+                  <div className="range">
+                    <p>min :{selectedFilter.min_budget} ₹</p>
+                    <p>max :{selectedFilter.max_budget} ₹</p>
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="area filterPopup">
+              {filterType === "Area" && (
+                <div className="area pop">
+                  <Area
+                    selectedFilter={selectedFilter}
+                    setSelectedFilter={setSelectedFilter}
+                  />
+                  <div className="range">
+                    <p>min :{selectedFilter.min_area} sq.ft</p>
+                    <p>max :{selectedFilter.max_area} sq.ft</p>
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="avaibility filterPopup">
+              {filterType === "avaible" && (
+                <div className="available pop">
+                  <div className="title">Avaibility</div>
+                  <div className="checkboxS">
+                    {availableLabel.map((item) => (
+                      <label className="labelS" key={item.key}>
+                        <Checkbox
+                          name={item.name}
+                          checked={available[item.name]}
+                          onChange={handleChange}
+                        />
+                        {item.name}
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <div className="sharing filterPopup">
+              {filterType === "sharing" && (
+                <div className="sharing pop">
+                  <div className="title">Sharing Per Room</div>
+                  <div className="checkboxS">
+                    {sharingLabel.map((item) => (
+                      <label className="labelS" key={item.key}>
+                        <Checkbox
+                          name={item.name}
+                          checked={sharing[item.name]}
+                          onChange={handleChangeSharing}
+                        />
+                        {item.name}
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="bedrooms filterPopup">
+              {filterType === "bedroom" && (
+                <div className="bedroom pop">
+                  <div className="title">No. of Bedrooms</div>
+
+                  <div className="checkboxS">
+                    {bedroomsLabel.map((item, i) => (
+                      <label className="labelS" key={item.key}>
+                        <Checkbox
+                          name={item.name}
+                          checked={bedrooms[item.name]}
+                          onChange={handleChangeBHK}
+                        />
+                        {item.name}
+                      </label>
+                    ))}
+                    {console.log(bedrooms)}
+                  </div>
+                </div>
+              )}
+            </div>
+              
+            <div className="submit">
               <button onClick={apply}>apply</button>
-              {console.log(locality, searchCities)}
+              {console.log("123",searchCities,123)}
             </div>
           </div>
         )}

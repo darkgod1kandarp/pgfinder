@@ -75,8 +75,8 @@ console.log(Fpassword,signUpDetails)
           setShowModal={setShowModal}
           setSignUpDetails={setSignUpDetails}
           signUpDetails={signUpDetails}
-          ownerDetails={ownerDetails}
-          setOwnerDetials={setOwnerDetails}
+            ownerDetails={ownerDetails}
+            setOwnerDetials={setOwnerDetails}
 />
         <ForgotPassword
           showModal={showModal}

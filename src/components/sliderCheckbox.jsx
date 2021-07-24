@@ -6,7 +6,7 @@ export  const Budget = ({selectedFilter,setSelectedFilter}) =>
     return `${value}`;
   }
 
-  const [value, setValue] = React.useState([20, 37]);
+  const [value, setValue] = React.useState([0, 1000000]);
   const handleChange = (event, newValue) => {
     setValue(newValue);
     setSelectedFilter({...selectedFilter,min_budget:value[0],max_budget:value[1]})
@@ -15,14 +15,13 @@ export  const Budget = ({selectedFilter,setSelectedFilter}) =>
   return (
     <div >
       <Typography id="range-slider" gutterBottom>
-        BUDGET
+        Budget
       </Typography>
       <Slider
         value={selectedFilter.max_budget||selectedFilter.min_budget? [selectedFilter.min_budget,selectedFilter.max_budget]:value}
         max={1000000}
         step={5000}
         onChange={handleChange}
-        valueLabelDisplay="auto"
         aria-labelledby="range-slider"
         getAriaValueText={valuetext}
       />
@@ -37,7 +36,7 @@ export  const Budget = ({selectedFilter,setSelectedFilter}) =>
     }
 
 
-    const [value, setValue] = React.useState([0, 100]);
+    const [value, setValue] = React.useState([0, 10000]);
 
     const handleChange = (event, newValue) => {
       setValue(newValue);

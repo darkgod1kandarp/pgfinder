@@ -1,0 +1,77 @@
+.filterpop{
+    position: absolute;
+    order: top;
+    width: 850px;
+    background-color: white;
+    padding: 1rem;
+    border-radius:5%;
+    box-shadow: 0px -2px 10px 5px rgba(0, 0, 0,0.2);
+    
+}
+.searchlabel{
+    font-size: 20px;
+    color:black;
+    border-bottom:1px solid #000;
+
+}
+.SearchBar{
+    margin-bottom: 10px;
+}
+.btn-Selector{
+    display:flex;
+    flex-wrap: wrap;
+    
+}
+.selector{
+    margin: 10px;
+    width: 140px;
+    height: 40px;
+    color: #fff;
+    background: rgb(6,14,131);
+    background: linear-gradient(0deg, rgba(6,14,131,1) 0%, rgba(12,25,180,1) 100%);
+    border: none;
+}
+.selector:active{
+    color:#fff;
+    background: rgb(0,3,255);
+ background: linear-gradient(0deg, rgba(0,3,255,1) 0%, rgba(2,126,251,1) 100%);
+}
+.selector:hover{
+    color:#fff;
+    background: rgb(0,3,255);
+ background: linear-gradient(0deg, rgb(0, 4, 255,1) 0%, rgba(2,126,251,1) 100%);
+}
+.city-header{
+    margin-left: 10px;
+}
+.sugestions{
+    width: 780px;
+}
+.Ginput{
+    padding: 10px;
+    margin: 10px;
+    width: 780px;
+    height: 20px;
+
+}
+.searchbar{
+    width:600px;
+    
+}
+.filterPopup{
+    margin-left: 15px;
+    width: 750px;
+}
+.checkboxS{
+    width:750px;
+    padding-left: 10px;
+
+    display: flex;
+    flex-wrap: wrap;
+
+} 
+.labelS{
+    max-width:15%;
+    width:100%
+}
+
