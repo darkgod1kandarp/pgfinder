@@ -12,9 +12,7 @@ const Card1 = ({ data, handleClick,loc, slider, pg, image ,setViewmore}) => {
 
   const [map,setMap] =useState(false)
  
-  console.log(loc)
   const pglocation = { lat: data.lat, lng: data.lng };
-  console.log(data,"card1")
   return (
     <div className="">
       {!slider && (
