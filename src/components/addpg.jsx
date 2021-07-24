@@ -12,8 +12,8 @@ const AddPg = () => {
     PlotArea: "",
     address: "",
     roomsForRent: "",
-    maximumCapacity: "",
-    costPerBed: "",
+    maximumCapacity: 0,
+    costPerBed: 0,
     sharing: "",
     avaibility: "",
     pgid:uuidv4(5),
@@ -400,7 +400,7 @@ const AddPg = () => {
                 type="text"
                 required
                 onChange={({ target }) => {
-                  setPgDetails({ ...pgDetails, maximumCapacity: target.value });
+                  setPgDetails({ ...pgDetails, maximumCapacity: parseInt(target.value) });
                 }}
               />
               <label>maximum capacity</label>
@@ -410,7 +410,7 @@ const AddPg = () => {
                 type="text"
                 required
                 onChange={({ target }) => {
-                  setPgDetails({ ...pgDetails, costPerBed: target.value });
+                  setPgDetails({ ...pgDetails, costPerBed: parseInt(target.value) });
                 }}
               />
               <label>Cost per bed</label>

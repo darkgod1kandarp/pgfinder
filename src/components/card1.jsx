@@ -11,7 +11,7 @@ const Card1 = ({ data, handleClick,loc, slider, pg, image ,setViewmore}) => {
   const pgid = "21312312452t1351";
 
   const [map,setMap] =useState(false)
- 
+ console.log(data)
   const pglocation = { lat: data.lat, lng: data.lng };
   return (
     <div className="">

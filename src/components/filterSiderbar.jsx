@@ -202,12 +202,13 @@ const FilterSideBar = ({
       style={{
         maxWidth: "380px",
         width: "100%",
-        height: "100vh",
+        height: "100%",
         justifyContent: "center",
       }}
     >
       <div className="content" style={{ width: "380px" ,height:"maxContent" }}>
         <div className="budget filter">
+          <div className="title">Budget</div>
           <Budget
             selectedFilter={selectedFilter}
             setSelectedFilter={setSelectedFilter}
@@ -219,6 +220,7 @@ const FilterSideBar = ({
         </div>
 
         <div className="area filter">
+          <div className="title">Area</div>
           <Area
             selectedFilter={selectedFilter}
             setSelectedFilter={setSelectedFilter}

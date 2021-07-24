@@ -1,3 +1,4 @@
+@import "./variable.scss";
 .filterpop{
     position: absolute;
     order: top;
@@ -44,19 +45,26 @@
 .city-header{
     margin-left: 10px;
 }
-.sugestions{
-    width: 780px;
-}
+// .sugestions{
+//     width: 780px;
+// }
+.card--suggestion {
+    font-size: 1.6rem;
+    border: 1px solid $gunmetal;
+
+    padding: 0.9rem;
+    &:hover {
+      background-color: $burnt-sienna !important;
+      border: 1px solid $burnt-sienna;
+      color: #fff;
+    }
+  }
 .Ginput{
-    padding: 10px;
-    margin: 10px;
-    width: 780px;
-    height: 20px;
+    
 
 }
 .searchbar{
-    width:600px;
-    
+    width:600px;    
 }
 .filterPopup{
     margin-left: 15px;
@@ -65,7 +73,6 @@
 .checkboxS{
     width:750px;
     padding-left: 10px;
-
     display: flex;
     flex-wrap: wrap;
 

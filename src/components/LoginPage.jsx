@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import ScatterBoxLoader from "./circleloader";
 import { Login, SignUp,ForgotPassword } from "./popup";
+import image from "./../images/image.jpg"
 export default function LoginPage() {
   const history = useHistory();
   const [user, setUser] = useState("");
@@ -234,7 +235,9 @@ export default function LoginPage() {
     <>
       {user === "" && (
         <div>
-          <button
+            <div className="Navbar">
+
+            <button
             onClick={() => {
               setUser("owner");
             }}
@@ -248,6 +251,13 @@ export default function LoginPage() {
           >
             A PG Finder{" "}
           </button>
+            </div>
+
+  <div className="main">
+    console.log(image)
+    <p>Looking for a home away from home? You are at the right place. The cost of living in pg is comparatively lower than renting an independent house. It's economically beneficial plus most of the pg's also offer facilities such as TV, refrigerator, bed and many more. For the younger generations, it is very difficult for them to clean or maintain their house. While living in PG they don't have to worry about that because the owner will take care of that. Most of the pg provides breakfast and dinner daily, and that cost is included in the rent. In PG, you do not have to bother paying electricity, water, or Internet bills. But for AC rooms they might have to pay an extra electricity cost.</p>
+  </div>
+
         </div>
       )}
 

@@ -14,10 +14,7 @@ export  const Budget = ({selectedFilter,setSelectedFilter}) =>
 
   return (
     <div >
-      <Typography id="range-slider" gutterBottom>
-        Budget
-      </Typography>
-      <Slider
+       <Slider
         value={selectedFilter.max_budget||selectedFilter.min_budget? [selectedFilter.min_budget,selectedFilter.max_budget]:value}
         max={1000000}
         step={5000}
@@ -46,9 +43,7 @@ export  const Budget = ({selectedFilter,setSelectedFilter}) =>
 
     return (
       <div >
-        <Typography id="range-slider" gutterBottom>
-          Area
-        </Typography>
+      
         <Slider
           value={selectedFilter.max_area? [selectedFilter.min_area,selectedFilter.max_area]:  value}
           max={10000}

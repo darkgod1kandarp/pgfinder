@@ -8,8 +8,7 @@ import "./searchbar.scss";
 import { Budget, Area, AvailableFor } from "./sliderCheckbox";
 import axios from "axios";
 const SearchBar = ({
-  sharing,
-  available,
+  sharing, available, 
   setSharing,
   setAvailable,
   availableLabel,
@@ -249,13 +248,12 @@ const SearchBar = ({
                           backgroundColor: suggestion.active
                             ? "#41b6e6"
                             : "#fff",
-                          width: "780px",
-                          marginLeft: "10px",
+                          
                         };
 
                         return (
                           <div
-                            className="sugestions"
+                            className="card--suggestion"
                             {...getSuggestionItemProps(suggestion, { style })}
                           >
                             {suggestion.description}

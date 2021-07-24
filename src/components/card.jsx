@@ -202,8 +202,8 @@ const Card = () => {
     
       {state && !slider ? (
         <div className="App1">
-          <div className="part1 sidebar">
-            <div className="querybox">
+          <div className="part1 card--sidebar">
+            <div className="card--querybox">
               <FilterSideBar
                 setSharing={setSharing}
                 setAvailable={setAvailable}
