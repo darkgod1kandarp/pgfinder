@@ -21,6 +21,7 @@ import PgLogin from "./components/pglogin";
 import DetailedCard from "./components/detailsCard";
 import AddPg from "./components/addpg";
 import Map from "./components/map";
+import AdminPage from "./components/AdminPage";
 // import CardPage from "./components/cardPage";
 import Direction from "./components/component";
 export default function App() {
@@ -43,7 +44,6 @@ export default function App() {
     <div className="">
       <BrowserRouter><Switch>
         
-        {/* <Route path="/" component={CardPage}></Route> */}
         <Route path="/login"  component={LoginPage}></Route>
         <Route path="/home" component={Register}></Route>
         <Route path="/dashboard" component={Dashboard}></Route>
@@ -54,7 +54,7 @@ export default function App() {
         <Route path ="/searchbar" component={SearchBar}></Route>
         <Route path="/pgfinderlogin" component = {PgFinderLogin}></Route>
         <Route path ="/Circle" component = {CircleLoader}></Route>
-              
+        <Route path="/AdminPage" component ={AdminPage}></Route>
         <Route path ="/card" component={Card}></Route>
         <Route path="/slider" component={Imageslider}></Route>
         <Route path="/owner" component={AddPg}></Route>

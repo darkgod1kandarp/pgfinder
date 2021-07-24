@@ -12,6 +12,7 @@ const FilterSideBar = ({
   setSelectedFilter,
   setBedrooms,
   bedrooms,
+  apply
 }) => {
 
   const servicesList = [
@@ -295,7 +296,7 @@ const FilterSideBar = ({
             </div>
         </div>
         <div className="">
-          <button className="apply">Apply</button>
+          <button className="apply" onClick={apply}>Apply</button>
         </div>
       </div>
     </div>

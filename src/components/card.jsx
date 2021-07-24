@@ -215,7 +215,7 @@ const Card = () => {
                 selectedFilter={selectedFilter}
                 bedrooms={bedrooms}
                 setBedrooms={setBedrooms}
-                
+                apply={apply}
               />
             </div>
           </div>
