@@ -255,6 +255,7 @@ const AddPg = () => {
     pgDetails.imgList.push(imgList);
     pgDetails.rule.push(list);
     pgDetails.location.push(locationList);
+    console.log(pgDetails)
     axios({
       method: "post",
       url: "http://localhost:5000/api/pgadding",
@@ -427,7 +428,7 @@ const AddPg = () => {
                 onClick={() => {
                   setPgDetails({ ...pgDetails, roomsForRent: "1BHK" });
                 }}
-                disabled={pgDetails.sharing === "1"}
+                disabled={pgDetails.roomsForRent === "1BHK"}
                 className="addpg__sharing--option"
               >
                 1BHK
@@ -436,7 +437,7 @@ const AddPg = () => {
                 onClick={() => {
                   setPgDetails({ ...pgDetails, roomsForRent: "2BHK" });
                 }}
-                disabled={pgDetails.sharing === "2"}
+                disabled={pgDetails.roomsForRent === "2BHK"}
                 className="addpg__sharing--option"
               >
                 2BHK
@@ -445,7 +446,7 @@ const AddPg = () => {
                 onClick={() => {
                   setPgDetails({ ...pgDetails, roomsForRent: "3BHK" });
                 }}
-                disabled={pgDetails.sharing === "3"}
+                disabled={pgDetails.roomsForRent === "3BHK"}
                 className="addpg__sharing--option"
               >
                 3BHK
@@ -454,7 +455,7 @@ const AddPg = () => {
                 onClick={() => {
                   setPgDetails({ ...pgDetails, roomsForRent: "4BHK" });
                 }}
-                disabled={pgDetails.sharing === "2"}
+                disabled={pgDetails.roomsForRent === "4BHK"}
                 className="addpg__sharing--option"
               >
                 4BHK
@@ -463,7 +464,7 @@ const AddPg = () => {
                 onClick={() => {
                   setPgDetails({ ...pgDetails, roomsForRent: "5BHK" });
                 }}
-                disabled={pgDetails.sharing === "3"}
+                disabled={pgDetails.roomsForRent === "5BHK"}
                 className="addpg__sharing--option"
               >
                 5BHK

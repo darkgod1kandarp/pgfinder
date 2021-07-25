@@ -1,73 +1,167 @@
-// .pg {
-//     display: flex;
-//     height: 100%;
-//     margin-right: 10rem;
-//     max-width: 61.1rem;
-//     margin-bottom: 2rem;
+// // .pg {
+// //     display: flex;
+// //     height: 100%;
+// //     margin-right: 10rem;
+// //     max-width: 61.1rem;
+// //     margin-bottom: 2rem;
     
 
-// }
+// // }
 
 
+@import './variable.scss';
 
+*,
+*::after,
+*::before {
+    padding: 0px;
+    margin: 0;
+    box-sizing: border-box !important;
+}
 
+.card {
+    width: 1000px;
+    display: flex;
 
-.pg--card{
-    background-color:#fff;
-    width:600px;
-    height:220px;
-    display:flex;
-    flex-wrap:wrap;
-    box-shadow: 0px -2px 10px 5px rgba(0, 0, 0,0.2);
-    margin-bottom: 10px;
-    border-radius:10px;
-    margin-left:10px;
+    &__left {
+        flex: 1;
     }
+
+    &__img-box {
+        height: 100%;
+    }
+
+    &__right {
+        color: #fff;
+        padding: 40px;
+
+        background: linear-gradient(#ee6c4d 0%, #b94d34 100%);
+    }
+
+    &__title {
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 30px;
+        text-align: left;
+        color: #fff;
+        margin-bottom: 10px;
+    }
+
+    &__address {
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 24px;
+        text-align: left;
+        color: #fff;
+        margin-bottom: 30px;
+        max-width: 500px;
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-column-gap: 10px;
+        grid-row-gap: 10px;
+        margin-top: 20px;
+        margin-bottom: 30px;
+        &-item {
+            display: flex;
+            align-items: center;
+
+            &--property {
+                font-weight: 600;
+                font-size: 16px;
+                min-width: 170px;
+            }
+
+            &--value {
+                font-size: 16px;
+            }
+        }
+    }
+
+    &__link {
+        &-box {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        &-map {
+            font-size: 14px;
+            color: #fff;
+            transform: translateY(5px);
+        }
+
+        &-more {
+            font-size: 20px;
+        }
+    }
+}
+
+.arrow {
+    margin-left: 20px;
+}
+
+
+
+// .pg--card{
+//     background-color:#fff;
+//     width:600px;
+//     height:220px;
+//     display:flex;
+//     flex-wrap:wrap;
+//     box-shadow: 0px -2px 10px 5px rgba(0, 0, 0,0.2);
+//     margin-bottom: 10px;
+//     border-radius:10px;
+//     margin-left:10px;
+//     }
   
-  .pg--image{
-  max-width:30%;
-    width:100%;
-    // background-color:#129123;
-    border-radius:10px
-  }
-  .pg--content{
-    max-width:70%;
-    width:100%;
+//   .pg--image{
+//   max-width:30%;
+//     width:100%;
+//     // background-color:#129123;
+//     border-radius:10px
+//   }
+//   .pg--content{
+//     max-width:70%;
+//     width:100%;
     
-  }
-  .pg--property{
-    max-width:35%;
-    width:100%;
-    margin:0;
-    font-size:16px;
-    color:#435323;
-    padding-bottom:6px;
-    padding-left:5px
-  }
-  .pg--value{
-    max-width:60%;
-    width:100%;
-    margin:0;
-  /*   margin-left:10px */
-  }
-  .pg--property-value{
-    margin:10;
-    display:flex;
-    flex-wrap:wrap;
-    }
+//   }
+//   .pg--property{
+//     max-width:35%;
+//     width:100%;
+//     margin:0;
+//     font-size:16px;
+//     color:#435323;
+//     padding-bottom:6px;
+//     padding-left:5px
+//   }
+//   .pg--value{
+//     max-width:60%;
+//     width:100%;
+//     margin:0;
+//   /*   margin-left:10px */
+//   }
+//   .pg--property-value{
+//     margin:10;
+//     display:flex;
+//     flex-wrap:wrap;
+//     }
   
-  .pg--name{
-    margin:0;
-    display:flex;
-    justify-content:center;
-  }
-  .pg--name--text{
-    margin:    0;
-    margin-top:10px;
-    font-size: 20px;    
-  }
-  .pg--btn-class{
-    display:flex;
-    justify-content:space-around
-  }
+//   .pg--name{
+//     margin:0;
+//     display:flex;
+//     justify-content:center;
+//   }
+//   .pg--name--text{
+//     margin:    0;
+//     margin-top:10px;
+//     font-size: 20px;    
+//   }
+//   .pg--btn-class{
+//     display:flex;
+//     justify-content:space-around
+//   }
   
