@@ -112,7 +112,7 @@ const SearchBar = ({
         console.log(res.data.city);
       });
     });
-  }, [available]);
+  }, []);
   const Checkbox = ({ type = "checkbox", name, checked = false, onChange }) => {
     return (
       <input className="input" type={type} name={name} checked={checked} onChange={onChange} />
@@ -130,9 +130,7 @@ const SearchBar = ({
       [event.target.name]: event.target.checked,
     });
   };
-  const handleApply = () => {
-    setSelectedFilter({ ...selectedFilter, available: available });
-  };
+ 
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
     console.log(results[0]);

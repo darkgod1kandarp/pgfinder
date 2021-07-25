@@ -13,8 +13,8 @@ const AddPg = () => {
     PlotArea: "",
     address: "",
     roomsForRent: "",
-    maximumCapacity: "",
-    costPerBed: "",
+    maximumCapacity: 0,
+    costPerBed: 0,
     sharing: "",
     avaibility: "",
     pgid: uuidv4(5),
@@ -74,7 +74,7 @@ const AddPg = () => {
     },
     [setMode, mode]
   );
-
+  
   useEffect(() => {
     console.log(address);
     setPgDetails({ ...pgDetails, address: address });
@@ -250,11 +250,6 @@ const AddPg = () => {
   const Adddetails = async () => {
     console.log(123, uuidv4(10));
     console.log(services, 123);
-    // // console.log(user)
-    // const id = await uuidv4(5);
-    // console.log(id);
-    // setPgDetails({ ...pgDetails, pgid: id });
-
     pgDetails.services.push(services);
     pgDetails.imgData.push(imgData);
     pgDetails.imgList.push(imgList);
@@ -386,7 +381,7 @@ const AddPg = () => {
             </PlacesAutocomplete>
 
             <div class="addpg__form--container">
-              <label htmlFor="addpg__aror">available rooms for rent</label>
+              {/* <label htmlFor="addpg__aror">available rooms for rent</label>
               <input
                 type="text"
                 required
@@ -396,7 +391,7 @@ const AddPg = () => {
                 placeholder={"available rooms for rent"}
                 className="addpg__input"
                 id="addpg__aror"
-              />
+              /> */}
             </div>
             <div class="addpg__form--container">
               <label htmlFor="addpg__maximum">maximum capacity</label>
@@ -404,7 +399,7 @@ const AddPg = () => {
                 type="text"
                 required
                 onChange={({ target }) => {
-                  setPgDetails({ ...pgDetails, maximumCapacity: target.value });
+                  setPgDetails({ ...pgDetails, maximumCapacity: parseInt(target.value) });
                 }}
                 className="addpg__input"
                 placeholder="maximum capacity"
@@ -417,13 +412,64 @@ const AddPg = () => {
                 type="text"
                 required
                 onChange={({ target }) => {
-                  setPgDetails({ ...pgDetails, costPerBed: target.value });
+                  setPgDetails({ ...pgDetails, costPerBed: parseInt(target.value) });
                 }}
                 className="addpg__input"
                 placeholder="Cost per bed"
                 id="addpost__cpb"
               />
             </div>
+            <div className="addpg__sharing">
+            <label className="addpg__sharing--label">
+                No of Bedrooms :{" "}
+              </label>
+              <button
+                onClick={() => {
+                  setPgDetails({ ...pgDetails, roomsForRent: "1BHK" });
+                }}
+                disabled={pgDetails.sharing === "1"}
+                className="addpg__sharing--option"
+              >
+                1BHK
+              </button>
+              <button
+                onClick={() => {
+                  setPgDetails({ ...pgDetails, roomsForRent: "2BHK" });
+                }}
+                disabled={pgDetails.sharing === "2"}
+                className="addpg__sharing--option"
+              >
+                2BHK
+              </button>
+              <button
+                onClick={() => {
+                  setPgDetails({ ...pgDetails, roomsForRent: "3BHK" });
+                }}
+                disabled={pgDetails.sharing === "3"}
+                className="addpg__sharing--option"
+              >
+                3BHK
+              </button>
+              <button
+                onClick={() => {
+                  setPgDetails({ ...pgDetails, roomsForRent: "4BHK" });
+                }}
+                disabled={pgDetails.sharing === "2"}
+                className="addpg__sharing--option"
+              >
+                4BHK
+              </button>
+              <button
+                onClick={() => {
+                  setPgDetails({ ...pgDetails, roomsForRent: "5BHK" });
+                }}
+                disabled={pgDetails.sharing === "3"}
+                className="addpg__sharing--option"
+              >
+                5BHK
+              </button>
+            </div>
+            
             <div className="addpg__sharing">
               <label className="addpg__sharing--label">
                 Sharing per room :{" "}

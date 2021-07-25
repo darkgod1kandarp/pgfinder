@@ -67,7 +67,6 @@ const Card = () => {
     min_budget: 0,
     max_area: 10000,
     min_area: 0,
-    available: "both",
   });
   const [bedrooms, setBedrooms] = useState({
     "1BHK": false,
@@ -105,6 +104,7 @@ const Card = () => {
     both: false,
   });
 
+  
   const [searchCities, setSearchCities] = useState({});
   useEffect(() => {
     axios({
@@ -128,7 +128,6 @@ const Card = () => {
         }).then((res) => {
           setCardData({ ...res.data.data });
           console.log(res, "qwe");
-          // console.log(cardData)
         });
       });
     });
@@ -149,10 +148,15 @@ const Card = () => {
     if (temp1.length === 0) {
       temp1 = [1, 2, 3];
     }
+    var temp2 =Object.keys(available).filter((key)=> available[key])
+    if (temp2.length === 0) {
+      temp2 = ["boys", "girls", "both"];
+    }
     setSelectedFilter({
       ...selectedFilter,
       bedrooms: temp,
       sharing: temp1,
+      available:temp2,
       location: searchCities,
     });
   }, [bedrooms, sharing, searchCities]);
