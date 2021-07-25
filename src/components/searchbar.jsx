@@ -115,7 +115,7 @@ const SearchBar = ({
   }, [available]);
   const Checkbox = ({ type = "checkbox", name, checked = false, onChange }) => {
     return (
-      <input type={type} name={name} checked={checked} onChange={onChange} />
+      <input className="input" type={type} name={name} checked={checked} onChange={onChange} />
     );
   };
   const handleChange = (event) => {
@@ -212,14 +212,14 @@ const SearchBar = ({
             className="filterpop"
         
           >
+            <div className="searchbar__crule--container">
             {disCity.map((city, i) => (
-              <div className="">
-                <label className="city-header" id={i} htmlFor="">
-                  {city}
-                  <button id={i} onClick={handleDeleteTag}>x</button>
-                </label>
+              <div className="searchbar__crule">
+                 <p className="searchbar__crule--text">{city}</p>
+                 <button className="searchbar__crule--btn" id={i} onClick={handleDeleteTag}>x</button>
               </div>
             ))}
+            </div>
             {console.log(disCity)}
 
             <div className="inputsection">
@@ -237,7 +237,7 @@ const SearchBar = ({
                   <div>
                     <input
                       className="Ginput"
-                      {...getInputProps({ placeholder: "Google Search" })}
+                      {...getInputProps({ placeholder: "Search Locality/Projects" })}
                     />
 
                     <div>
@@ -332,6 +332,7 @@ const SearchBar = ({
             <div className="budget filterPopup">
               {filterType === "budget" && (
                 <div className="budget pop">
+                  <div className="title">Budget</div>
                   <Budget
                     selectedFilter={selectedFilter}
                     setSelectedFilter={setSelectedFilter}
@@ -346,6 +347,9 @@ const SearchBar = ({
             <div className="area filterPopup">
               {filterType === "Area" && (
                 <div className="area pop">
+                  <div className="title">
+                    Area
+                  </div>
                   <Area
                     selectedFilter={selectedFilter}
                     setSelectedFilter={setSelectedFilter}
@@ -363,7 +367,9 @@ const SearchBar = ({
                   <div className="title">Avaibility</div>
                   <div className="checkboxS">
                     {availableLabel.map((item) => (
-                      <label className="labelS" key={item.key}>
+                      <label className={`labelS ${
+                        available[item.name] ? "selected" : ""
+                      }`} key={item.key}>
                         <Checkbox
                           name={item.name}
                           checked={available[item.name]}
@@ -383,7 +389,9 @@ const SearchBar = ({
                   <div className="title">Sharing Per Room</div>
                   <div className="checkboxS">
                     {sharingLabel.map((item) => (
-                      <label className="labelS" key={item.key}>
+                      <label className={`labelS ${
+                        sharing[item.name] ? "selected" : ""
+                      }`} key={item.key} key={item.key}>
                         <Checkbox
                           name={item.name}
                           checked={sharing[item.name]}
@@ -403,7 +411,9 @@ const SearchBar = ({
 
                   <div className="checkboxS">
                     {bedroomsLabel.map((item, i) => (
-                      <label className="labelS" key={item.key}>
+                      <label className={`labelS ${
+                        bedrooms[item.name] ? "selected" : ""
+                      }`} key={item.key} key={item.key}>
                         <Checkbox
                           name={item.name}
                           checked={bedrooms[item.name]}
@@ -418,8 +428,8 @@ const SearchBar = ({
               )}
             </div>
               
-            <div className="submit">
-              <button onClick={apply}>apply</button>
+            <div className="searchbar__submit--container">
+              <button className="searchbar__submit" onClick={apply}>Apply</button>
               {console.log("123",searchCities,123)}
             </div>
           </div>

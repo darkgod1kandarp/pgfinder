@@ -10,22 +10,19 @@ import axios from "axios";
 import FilterSideBar from "./filterSiderbar";
 const Card = () => {
   const history = useHistory();
-    const [cardData,setCardData]=useState()
-    const [cardDataKeys,setCardDataKeys]=useState([])
-    const location = useGeolocation();
-    const [loc,setLoc]=useState({
-      userlat:0,
-      userLng:0
-    })
+  const [cardData, setCardData] = useState();
+  const [cardDataKeys, setCardDataKeys] = useState([]);
+  const location = useGeolocation();
+  const [loc, setLoc] = useState({
+    userlat: 0,
+    userLng: 0,
+  });
 
-    useEffect(() => {
-        
-        setLoc({userlat:location.latitude,userLng:location.longitude})
-    }, [location])
-    // console.log(loc,"qwertyu")
-    // console.log(location,123)
+  useEffect(() => {
+    setLoc({ userlat: location.latitude, userLng: location.longitude });
+  }, [location]);
+
   React.useEffect(() => {
-    
     const data = JSON.parse(localStorage.getItem("data"));
 
     const checkingIfTheLocalStorageHaveTheDataOrNot =
@@ -102,7 +99,6 @@ const Card = () => {
     },
   ];
 
- 
   const [available, setAvailable] = useState({
     boys: false,
     girls: false,
@@ -128,22 +124,22 @@ const Card = () => {
         axios({
           method: "post",
           url: "http://localhost:5000/api/carddata",
-          data: {city:res.data.city,lat:res.data.lat,lon:res.data.lon}
+          data: { city: res.data.city, lat: res.data.lat, lon: res.data.lon },
         }).then((res) => {
-          setCardData({...res.data.data})
-          console.log(res,"qwe");
+          setCardData({ ...res.data.data });
+          console.log(res, "qwe");
           // console.log(cardData)
         });
       });
     });
   }, []);
   useEffect(() => {
-    if(cardData===undefined){return}
-    setCardDataKeys([Object.keys(cardData)])
-    console.log(cardDataKeys,21)
-
-    
-  }, [cardData])
+    if (cardData === undefined) {
+      return;
+    }
+    setCardDataKeys([Object.keys(cardData)]);
+    console.log(cardDataKeys, 21);
+  }, [cardData]);
   useEffect(() => {
     var temp = Object.keys(bedrooms).filter((key) => bedrooms[key]);
     if (temp.length === 0) {
@@ -186,7 +182,6 @@ const Card = () => {
     },
   ];
 
-  
   const [state, setState] = useState(true);
 
   const [slider, setSlider] = useState(false);
@@ -199,9 +194,9 @@ const Card = () => {
 
   return (
     <>
-    
       {state && !slider ? (
         <div className="App1">
+          <div className="card--navbar"></div>
           <div className="part1 card--sidebar">
             <div className="card--querybox">
               <FilterSideBar
@@ -221,52 +216,45 @@ const Card = () => {
           </div>
 
           <div className="part1 grid">
-            <div className="" style={{marginBottom:"10px"}}>
-            <SearchBar
-            
-            setSharing={setSharing}
-              setAvailable={setAvailable}
-              available={available}
-              sharing={sharing}
-              availableLabel={availableLabel}
-              sharingLabel={sharingLabel}
-              setSelectedFilter={setSelectedFilter}
-              selectedFilter={selectedFilter}
-              searchCities={searchCities}
-              setSearchCities={setSearchCities}
-              bedrooms={bedrooms}
-              setBedrooms={setBedrooms}
-              apply={apply}
-            />
-    </div>
-            <div className="sd">
-             
-             {
-             cardDataKeys.length!==0 &&
-             
-             cardDataKeys[0].map((data,i)=>(
-               
-               
-               <div className="">
-                   <Card1
-                handleClick={handleClick}
-                slider={slider}
-                setSlider={setSlider}
-                data={cardData[data]}
-                image={`pg--image-i ${i}`}
-                loc={loc}
+            <div className="" style={{ marginBottom: "10px" }}>
+              <SearchBar
+                setSharing={setSharing}
+                setAvailable={setAvailable}
+                available={available}
+                sharing={sharing}
+                availableLabel={availableLabel}
+                sharingLabel={sharingLabel}
+                setSelectedFilter={setSelectedFilter}
+                selectedFilter={selectedFilter}
+                searchCities={searchCities}
+                setSearchCities={setSearchCities}
+                bedrooms={bedrooms}
+                setBedrooms={setBedrooms}
+                apply={apply}
               />
-                 
-               </div>
-             ))}
-             
-             
+            </div>
+            <div className="sd">
+              {cardDataKeys.length !== 0 &&
+                cardDataKeys[0].map((data, i) => (
+                  <div className="">
+                    <Card1
+                      handleClick={handleClick}
+                      slider={slider}
+                      setSlider={setSlider}
+                      data={cardData[data]}
+                      image={`pg--image-i ${i}`}
+                      
+  />
+                  </div>
+                ))}
             </div>
           </div>
         </div>
       ) : (
         <div>
-          {console.log(cardData[cardDataKeys[0][value]].url,"123we13r")}
+          {console.log(cardData[cardDataKeys[0][value]].url, "123we13r")}
+          
+          
           <Slider
             images={cardData[cardDataKeys[0][value]].url}
             length1={cardData[cardDataKeys[0][value]].url.length * 82}

@@ -1,22 +1,23 @@
-import { useHistory } from "react-router-dom";
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
+import history, { useHistory } from 'react-router-dom'
 import { v4 as uuidv4 } from "uuid";
 import React, { useRef, useEffect, useCallback, useState } from "react";
 import axios from "axios";
+import "./addpg.scss";
 const AddPg = () => {
   const [pgDetails, setPgDetails] = useState({
     flatName: "",
     PlotArea: "",
     address: "",
     roomsForRent: "",
-    maximumCapacity: 0,
-    costPerBed: 0,
+    maximumCapacity: "",
+    costPerBed: "",
     sharing: "",
     avaibility: "",
-    pgid:uuidv4(5),
+    pgid: uuidv4(5),
     services: [],
     imgList: [],
     imgData: [],
@@ -30,36 +31,13 @@ const AddPg = () => {
       setMode("");
     }
   };
+  const [files, setFiles] = useState([]);
   const [list, setList] = useState([]);
 
   const [rule, setRule] = useState("");
   const handleDeleteTag = ({ target }) => {
     setList(list.filter((element, index) => index !== parseInt(target.id)));
   };
-
-  const handleDeleteLocationTag = ({ target }) => {
-    setLocationList(
-      locationList.filter((element, index) => index !== parseInt(target.id))
-    );
-
-  };
- 
-
-  const history = useHistory();
-  const [address, setAddress] = React.useState("");
-  const [coordinates, setCoordinates] = React.useState({
-    lat: null,
-    lng: null,
-  });
-
-  const keyPress = useCallback(
-    (e) => {
-      if (e.key === "Escape" && mode) {
-        setMode("");
-      }
-    },
-    [setMode, mode]
-  );
   const [services, setServices] = useState({
     "food services": false,
     AC: false,
@@ -74,13 +52,36 @@ const AddPg = () => {
     wardern: false,
     security: false,
   });
+  const [address, setAddress] = React.useState("");
+  const [cusService, setCusService] = useState("");
+  const [customArr, setCustomArr] = useState([]);
+  const removeService = ({ target }) => {
+    setCustomArr(
+      customArr.filter((element, index) => index !== parseInt(target.id))
+    );
+  };
+  let servicesarr;
+  useEffect(() => {
+    servicesarr = Object.keys(services).filter((key) => services[key]);
+
+    setPgDetails({ ...pgDetails, service: servicesarr.concat(customArr) });
+  }, [services, customArr]);
+  const keyPress = useCallback(
+    (e) => {
+      if (e.key === "Escape" && mode) {
+        setMode("");
+      }
+    },
+    [setMode, mode]
+  );
+
   useEffect(() => {
     console.log(address);
     setPgDetails({ ...pgDetails, address: address });
   }, [address]);
   const servicesList = [
     {
-      name: "jain food",
+      name: "food services",
       key: 1,
       label: "facilities",
     },
@@ -90,7 +91,7 @@ const AddPg = () => {
       label: "facilities",
     },
     {
-      name: "attched washroom",
+      name: "attched washroom/bathroom",
       key: 3,
       label: "facilities",
     },
@@ -105,7 +106,7 @@ const AddPg = () => {
       label: "facilities",
     },
     {
-      name: "room cleaning",
+      name: "room cleaning service",
       key: 6,
       label: "facilities",
     },
@@ -145,36 +146,18 @@ const AddPg = () => {
 
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
-    console.log(results[0]);
     const latLng = await getLatLng(results[0]);
-    console.log(latLng, value);
+
     setPgDetails((pgDetails) => {
       return { ...pgDetails, address: value };
     });
     setPgDetails({ ...pgDetails, ...latLng });
+    console.log(typeof latLng.lat);
 
     setAddress(value);
-    setCoordinates(latLng);
   };
+  const history=useHistory()
 
-  const [cusService,setCusService]=useState("")
-  const [customArr,setCustomArr]=useState([])
-  const removeService=({target})=>{
-    setCustomArr(
-        customArr.filter((element,index)=>index !== parseInt(target.id))
-    )
-  }
-  let servicesarr
-  useEffect(() => {
-    
-    servicesarr = Object.keys(services).filter((key) => services[key]);
-    
-    console.log(servicesarr.concat(customArr,123))
-    
-    setPgDetails({...pgDetails,service:servicesarr.concat(customArr)})
-    
-  }, [services,customArr])
-  console.log(pgDetails.service)
   React.useEffect(() => {
     const data = JSON.parse(localStorage.getItem("data"));
 
@@ -202,7 +185,7 @@ const AddPg = () => {
         await axios({
           method: "post",
           url: "http://localhost:5000/api/checking",
-          
+
           headers: { Authorization: jwt },
         })
           .then(async (res) => {
@@ -217,13 +200,23 @@ const AddPg = () => {
       fetchApi();
     }
   }, [history]);
-  const Checkbox = ({ type = "checkbox", name, checked = false, onChange }) => {
+  const Checkbox = ({
+    type = "checkbox",
+    name,
+    checked = false,
+    onChange,
+    className,
+  }) => {
     return (
-      <input type={type} name={name} checked={checked} onChange={onChange} />
+      <input
+        type={type}
+        name={name}
+        checked={checked}
+        onChange={onChange}
+        className={className}
+      />
     );
   };
-  
-
   const handleChange = (event) => {
     setServices({
       ...services,
@@ -253,6 +246,7 @@ const AddPg = () => {
     });
   };
   const [locationList, setLocationList] = useState([]);
+  const [location, setLocation] = useState();
   const Adddetails = async () => {
     console.log(123, uuidv4(10));
     console.log(services, 123);
@@ -260,8 +254,8 @@ const AddPg = () => {
     // const id = await uuidv4(5);
     // console.log(id);
     // setPgDetails({ ...pgDetails, pgid: id });
-    
-    // pgDetails.services.push(services);
+
+    pgDetails.services.push(services);
     pgDetails.imgData.push(imgData);
     pgDetails.imgList.push(imgList);
     pgDetails.rule.push(list);
@@ -276,6 +270,7 @@ const AddPg = () => {
   };
   const onSelectFile = async (e) => {
     let files = e.target.files;
+    setFiles([...files]);
     let readers = [];
     if (!files.length) return;
 
@@ -312,54 +307,59 @@ const AddPg = () => {
 
   return (
     <>
-      {mode === "" && (
-        <button
-          onClick={() => {
-            setMode("pg");
-          }}
-        >
-          addpg
-        </button>
-      )}
-      {mode === "pg" && (
-        <div className="" onClick={closeModal} ref={modalRef}>
-          <div className="" mode={mode}>
-            <h1>basic details</h1>
-            <div class="form-group">
+      
+        <div className="addpg__container" onClick={closeModal} ref={modalRef}>
+          <div className="addpg" mode={mode}>
+            <h1 className="addpg__heading">Basic Details</h1>
+            <div class="addpg__form--container">
+              <label htmlFor="addpg__noa">Name of appartment</label>
               <input
                 type="text"
                 required
                 onChange={({ target }) => {
                   setPgDetails({ ...pgDetails, flatName: target.value });
                 }}
+                id="addpg__noa"
+                className="addpg__input"
+                placeholder={"Name of appartment"}
               />
-              <label>Name of appartment</label>
             </div>
-            <div class="form-group">
+            <div class="addpg__form--container">
+              <label htmlFor="addpg__area">Area</label>
               <input
                 type="text"
                 required
                 onChange={({ target }) => {
                   setPgDetails({ ...pgDetails, PlotArea: target.value });
                 }}
+                id="addpg__area"
+                className="addpg__input"
+                placeholder={"Area"}
               />
-              <label>Area</label>
             </div>
-            <div className="address">
-              <PlacesAutocomplete
-                value={address}
-                onChange={setAddress}
-                onSelect={handleSelect}
-              >
-                {({
-                  getInputProps,
-                  suggestions,
-                  getSuggestionItemProps,
-                  loading,
-                }) => (
-                  <div className="form-group">
-                    <input type="textbox" {...getInputProps({})} />
-                    <label>adress </label>
+
+            <PlacesAutocomplete
+              value={address}
+              onChange={setAddress}
+              onSelect={handleSelect}
+            >
+              {({
+                getInputProps,
+                suggestions,
+                getSuggestionItemProps,
+                loading,
+              }) => (
+                <div className="addpg__form--container">
+                  <label htmlFor="addpg__address">Address</label>
+                  <div className="addpg__address">
+                    <input
+                      type="textbox"
+                      {...getInputProps({})}
+                      className="addpg__input"
+                      placeholder="address"
+                      id="addpg__address"
+                    />
+
                     <div>
                       {loading ? <div>...loading</div> : null}
 
@@ -381,46 +381,59 @@ const AddPg = () => {
                       })}
                     </div>
                   </div>
-                )}
-              </PlacesAutocomplete>
-            </div>
+                </div>
+              )}
+            </PlacesAutocomplete>
 
-            <div class="form-group">
+            <div class="addpg__form--container">
+              <label htmlFor="addpg__aror">available rooms for rent</label>
               <input
                 type="text"
                 required
                 onChange={({ target }) => {
                   setPgDetails({ ...pgDetails, roomsForRent: target.value });
                 }}
+                placeholder={"available rooms for rent"}
+                className="addpg__input"
+                id="addpg__aror"
               />
-              <label>available rooms for rent</label>
             </div>
-            <div class="form-group">
+            <div class="addpg__form--container">
+              <label htmlFor="addpg__maximum">maximum capacity</label>
               <input
                 type="text"
                 required
                 onChange={({ target }) => {
-                  setPgDetails({ ...pgDetails, maximumCapacity: parseInt(target.value) });
+                  setPgDetails({ ...pgDetails, maximumCapacity: target.value });
                 }}
+                className="addpg__input"
+                placeholder="maximum capacity"
+                id="addpg__maximum"
               />
-              <label>maximum capacity</label>
             </div>
-            <div class="form-group">
+            <div class="addpg__form--container">
+              <label htmlFor="addpg__cpb">Cost Per Bed</label>
               <input
                 type="text"
                 required
                 onChange={({ target }) => {
-                  setPgDetails({ ...pgDetails, costPerBed: parseInt(target.value) });
+                  setPgDetails({ ...pgDetails, costPerBed: target.value });
                 }}
+                className="addpg__input"
+                placeholder="Cost per bed"
+                id="addpost__cpb"
               />
-              <label>Cost per bed</label>
             </div>
-            <div className="sharing">
-              <label>sharing per room</label>
+            <div className="addpg__sharing">
+              <label className="addpg__sharing--label">
+                Sharing per room :{" "}
+              </label>
               <button
                 onClick={() => {
                   setPgDetails({ ...pgDetails, sharing: "1" });
                 }}
+                disabled={pgDetails.sharing === "1"}
+                className="addpg__sharing--option"
               >
                 1
               </button>
@@ -428,6 +441,8 @@ const AddPg = () => {
                 onClick={() => {
                   setPgDetails({ ...pgDetails, sharing: "2" });
                 }}
+                disabled={pgDetails.sharing === "2"}
+                className="addpg__sharing--option"
               >
                 2
               </button>
@@ -435,15 +450,29 @@ const AddPg = () => {
                 onClick={() => {
                   setPgDetails({ ...pgDetails, sharing: "3" });
                 }}
+                disabled={pgDetails.sharing === "3"}
+                className="addpg__sharing--option"
               >
                 3
               </button>
+              <button
+                onClick={() => {
+                  setPgDetails({ ...pgDetails, sharing: "" });
+                }}
+                className="addpg__sharing--option"
+              >
+                Remove
+              </button>
             </div>
-            <div className="avaibitlty">
+            <div className="avaibitlty addpg__avaibility">
+              <label className="addpg__avaibility--label">Avaibility</label>
+
               <button
                 onClick={() => {
                   setPgDetails({ ...pgDetails, avaibility: "girls" });
                 }}
+                disabled={pgDetails.avaibility === "girls"}
+                className="addpg__avaibility--option"
               >
                 girls
               </button>
@@ -451,6 +480,8 @@ const AddPg = () => {
                 onClick={() => {
                   setPgDetails({ ...pgDetails, avaibility: "boys" });
                 }}
+                disabled={pgDetails.avaibility === "boys"}
+                className="addpg__avaibility--option"
               >
                 boys
               </button>
@@ -458,58 +489,69 @@ const AddPg = () => {
                 onClick={() => {
                   setPgDetails({ ...pgDetails, avaibility: "both" });
                 }}
+                disabled={pgDetails.avaibility === "both"}
+                className="addpg__avaibility--option"
               >
                 both
               </button>
-              
             </div>
-            <div className="services">
+            <div className="addpg__services">
               {servicesList.map((item) => (
-                <label key={item.key}>
+                <label
+                  key={item.key}
+                  className={`addpg__services--option ${
+                    services[item.name] ? "addpg__services--selected" : ""
+                  }`}
+                >
                   {item.name}
                   <Checkbox
                     name={item.name}
                     checked={services[item.name]}
                     onChange={handleChange}
+                    className={"addpg__services--input"}
                   />
                 </label>
               ))}
-             
             </div>
-           <div className="custom service">
-           <div className="">
-
-                  {
-                    customArr.map((ser,i)=>(
-                      <div className="">
-                          <label htmlFor="">{ser}</label>
-                          <button id={i} onClick={removeService}>X</button>
-
-                      </div>
-                    ))
+                  
+            <div className="addpg__rule">
+              <input
+                type="text"
+                value={cusService}
+                onChange={({ target }) => {
+                  setCusService(target.value);
+                }}
+                className="addpg__rule--input"
+              />
+              <button
+                onClick={() => {
+                  if (cusService !== "") {
+                    setCustomArr([...customArr, cusService]);
+                    console.log(customArr);
+                    setCusService("");
                   }
-
-                <input type="text" value={cusService} onChange={({target})=>{
-                    setCusService(target.value)
-
-                }}/>
-                <button onClick={()=>{
-                  if(cusService!==""){
-                    setCustomArr([...customArr,cusService])
-                    console.log(customArr)
-                    setCusService("")
-                  }
-                }}>addService</button>
-              </div>
-           </div>
-
-            <div className="rule">
+                }}
+                className="addpg__rule--btn"
+              >
+                addService
+              </button>
+            </div>
+            <div className="addpg__rule">
               <input
                 type="text"
                 value={rule}
                 onChange={({ target }) => {
                   setRule(target.value);
                   console.log(target.value);
+                }}
+                className="addpg__rule--input"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    if (rule !== "") {
+                      setList([...list, rule]);
+                      setRule("");
+                    }
+                  }
                 }}
               />
               <button
@@ -519,54 +561,93 @@ const AddPg = () => {
                     setRule("");
                   }
                 }}
+                className="addpg__rule--btn"
               >
                 addRule
               </button>
+            </div>
+            <div className="addpg__crule--container">
               {list.map((rule, i) => (
-                <>
-                  <p>{rule}</p>
-                  <button id={i} onClick={handleDeleteTag}>
+                <div className="addpg__crule">
+                  <p className="addpg__crule--text">{rule}</p>
+                  <button
+                    id={i}
+                    onClick={handleDeleteTag}
+                    className="addpg__crule--btn"
+                  >
                     X
                   </button>
-                </>
+                </div>
               ))}
             </div>
-            <div className="images">
+
+            <div className="addpg__crule--container">
+              {customArr.map((ser, i) => (
+                <div className="addpg__crule">
+                  <p className="addpg__crule--text">{ser}</p>
+                  <button
+                    id={i}
+                    onClick={removeService}
+                    className="addpg__crule--btn"
+                  >
+                    X
+                  </button>
+                </div>
+              ))}
+            </div>
+            <div className="addpg__image--container">
+              <label className="addpg__image" htmlFor="addpg__input">
+                <span className="addpg__image--btn">Choose</span>
+                <p className="addpg__image--name">
+                  {files.length === 0
+                    ? "Select Images"
+                    : files.slice(0, 2).map((file) => file.name)}
+                </p>
+              </label>
               <input
                 type="file"
                 accept="image/*"
                 onChange={onSelectFile}
                 multiple
+                id="addpg__input"
+                className="addpg__image--input"
               />
-              {imgList.map((img, i) => (
-                <>
-                  <button id={i} onClick={handleRemoveItem}>
-                    X
-                  </button>
-                  <img src={img} alt="img" height="100px" width="100px" />
-                  <input
-                    key={i}
-                    id={i}
-                    type="text"
-                    value={imgData[i]}
-                    onChange={({ target }) => {
-                      setImgData({ ...imgData, [i]: target.value });
-                    }}
-                  />
-                </>
-              ))}
-              <button onClick={Adddetails}>submit</button>
-              <button
-                onClick={() => {
-                  console.log(pgDetails);
-                }}
-              >
-                1
-              </button>
+              <div className="addpg__images--container">
+                {imgList.map((img, i) => (
+                  <div className="addpg__images">
+                    <button
+                      id={i}
+                      onClick={handleRemoveItem}
+                      className="addpg__images--btn"
+                    >
+                      X
+                    </button>
+                    <img
+                      src={img}
+                      alt="img"
+                      className="addpg__images--preview"
+                    />
+                    <input
+                      key={i}
+                      id={i}
+                      type="text"
+                      value={imgData[i]}
+                      className="addpg__images--input"
+                      onChange={({ target }) => {
+                        setImgData({ ...imgData, [i]: target.value });
+                      }}
+                    />
+                  </div>
+                ))}
+              </div>
+              <div className="addpg__submit--container">
+                <button onClick={Adddetails} className="addpg__submit">
+                  submit
+                </button>
+              </div>
             </div>
           </div>
         </div>
-      )}
     </>
   );
 };

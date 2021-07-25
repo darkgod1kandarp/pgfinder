@@ -1,0 +1,66 @@
+@import './variable.scss';
+.main{
+    
+    display: flex;
+    width: 90%;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top:2rem
+}
+
+
+.AdminPage{
+    &--cover{
+        border:1px solid $burnt-sienna;
+
+        border-radius:10px;
+        max-width: 45%;
+        width: 100%;
+        height: 300px;
+        // margin-right: 2px;
+        margin-bottom: 10px;
+
+    }
+    &--container--submit{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        
+    }
+    &--submit{
+        justify-self: center;
+        background-color:$burnt-sienna;
+        width: 140px;
+        border-radius:10px;
+        padding:1rem;
+        height: 4rem;
+        color:#fff
+    }
+
+    &--container{
+        height: 220px;
+        // width: 500px;
+        display: flex;
+        flex-direction: column;
+    }
+    &--P-v{
+        display: flex;
+        flex-wrap: wrap;
+        
+        padding: 10px;
+        }
+    &--property{
+        width: 40%;
+        font-size: 1.6rem;
+
+    }
+    &--value{
+        width: 60%;
+        font-size: 1.6rem;
+        font-weight: normal;
+    }
+
+        
+
+}

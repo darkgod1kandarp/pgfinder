@@ -1,19 +1,76 @@
 @import "./variable.scss";
+.selected{
+    color: #fff;
+    background: $burnt-sienna;
+}
+.searchbar{
+    border: 1px solid $burnt-sienna;
+    &__crule {
+        &--container {
+          width: 100%;
+        }
+        display: flex;
+    
+        width: 100%;
+        justify-content: space-between;
+        height: 5rem;
+        border: 1px solid $burnt-sienna;
+        margin-bottom: 1rem;
+        &--text {
+          font-size: 1.6rem;
+          width: 80%;
+          padding: 1rem;
+        }
+        &--btn {
+          width: 5%;
+          font-size: 1.8rem;
+          cursor: pointer;
+          background-color: $burnt-sienna;
+          border: none;
+          color: #fff;
+          &:hover {
+            background-color: $bdazzled-blue;
+          }
+        }
+      }
+      &__submit {
+        height: 4rem;
+        width: 140px;
+        border: none;
+        background-color: rgba($burnt-sienna, $alpha: 0.8);
+        color: #fff;
+        font-size: 1.8rem;
+        padding: 0rem 4rem;
+        margin: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 3rem;
+        cursor: pointer;
+        &:hover {
+          background-color: rgba($burnt-sienna, $alpha: 1);
+        }
+        &--container {
+          width: 100%;
+          display: flex;
+          justify-content: flex-start;
+          align-items: center;
+        }
+      }
+}
 .filterpop{
     position: absolute;
     order: top;
     width: 850px;
     background-color: white;
     padding: 1rem;
-    border-radius:5%;
+    border-radius:5px;
     box-shadow: 0px -2px 10px 5px rgba(0, 0, 0,0.2);
     
 }
 .searchlabel{
     font-size: 20px;
-    color:black;
-    border-bottom:1px solid #000;
-
+    color : $bdazzled-blue;
 }
 .SearchBar{
     margin-bottom: 10px;
@@ -28,19 +85,17 @@
     width: 140px;
     height: 40px;
     color: #fff;
-    background: rgb(6,14,131);
-    background: linear-gradient(0deg, rgba(6,14,131,1) 0%, rgba(12,25,180,1) 100%);
+    background: rgb($burnt-sienna,1);
     border: none;
+    border-radius:100px
 }
 .selector:active{
     color:#fff;
-    background: rgb(0,3,255);
- background: linear-gradient(0deg, rgba(0,3,255,1) 0%, rgba(2,126,251,1) 100%);
+    background: rgb($burnt-sienna,1);
 }
 .selector:hover{
     color:#fff;
-    background: rgb(0,3,255);
- background: linear-gradient(0deg, rgb(0, 4, 255,1) 0%, rgba(2,126,251,1) 100%);
+    background: rgb($burnt-sienna,.7);
 }
 .city-header{
     margin-left: 10px;
@@ -59,9 +114,12 @@
       color: #fff;
     }
   }
+  .input{display: none}
 .Ginput{
-    
-
+    width: 100%;
+    padding: .6rem;
+    font-size: 1.6rem;
+    border:1px solid $burnt-sienna !important
 }
 .searchbar{
     width:600px;    
@@ -78,7 +136,21 @@
 
 } 
 .labelS{
-    max-width:15%;
-    width:100%
+    font-size: 1.6rem;
+    margin: 0.5rem 1rem;
+    cursor: pointer;
+    padding: 1rem 2rem;
+    border: 1px solid transparent;
+    border-radius: 20rem;
+    font-family: "Montserrat Alternates", sans-serif;
+    box-shadow: 0px 3px 1px 1px rgba($color: #000000, $alpha: 0.1);
+    &:hover {
+      color: #fff;
+      background: $burnt-sienna;
+    }
 }
 
+
+.MuiSlider-root{
+    color: $burnt-sienna !important;
+} 

@@ -1,18 +1,23 @@
 import React,{useState} from "react";
-import Phase2 from "./phase2";
-// export default fDashboard(){
-
-// }
+import { useHistory } from "react-router";
  
 const Dashboard = () => {
 
-    const[adding,setAdding] = useState(false);
-    
+    const history =useHistory()
 
     return (<>
-      <button onClick={()=>setAdding(!adding)}>Add PG</button>
-      {adding && <Phase2/>}
-    
+
+    <div className="dashboard--navbar">
+      <button className="dashboard--logout">Logout</button>
+
+    </div>
+      <div className="main">
+        <button onClick={()=>{
+          history.push("/owner")
+        }}> Add PG</button>
+
+      </div>
+
     </> );
 }
  
