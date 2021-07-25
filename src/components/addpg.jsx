@@ -10,7 +10,7 @@ import "./addpg.scss";
 const AddPg = () => {
   const [pgDetails, setPgDetails] = useState({
     flatName: "",
-    PlotArea: "",
+    PlotArea: 0,
     address: "",
     roomsForRent: "",
     maximumCapacity: 0,
@@ -326,7 +326,7 @@ const AddPg = () => {
                 type="text"
                 required
                 onChange={({ target }) => {
-                  setPgDetails({ ...pgDetails, PlotArea: target.value });
+                  setPgDetails({ ...pgDetails, PlotArea: parseInt(target.value) });
                 }}
                 id="addpg__area"
                 className="addpg__input"

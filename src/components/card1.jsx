@@ -11,7 +11,12 @@ const Card1 = ({ data, handleClick,loc, slider, pg, image ,setViewmore}) => {
   const pgid = "21312312452t1351";
 
   const [map,setMap] =useState(false)
- console.log(data)
+  const[img,setImg]=useState("")
+  if(data.url.length===0){
+      setImg("https://images.unsplash.com/photo-1627177216561-db9deb41e825?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80")
+  }
+ console.log(data.url,123  )
+
   const pglocation = { lat: data.lat, lng: data.lng };
   return (
     <div className="">
@@ -107,7 +112,7 @@ const Card1 = ({ data, handleClick,loc, slider, pg, image ,setViewmore}) => {
         <div class="pg--card">
           <div class="pg--image">
             <img
-              src={data.url[0].imgurl}
+              src={img?img:data.url[0].imgurl}
               alt=".."
               width="180px"
               height="220px"

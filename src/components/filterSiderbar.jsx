@@ -236,7 +236,9 @@ const FilterSideBar = ({
 
           <div className="bedrooms-checbox checkbox">
             {bedroomsLabel.map((item, i) => (
-              <label className="bedrooms--label label" key={item.key}>
+              <label className={`label ${
+                bedrooms[item.name] ? "selected" : ""
+              }`}key={item.key}>
                 <Checkbox
                   name={item.name}
                   checked={bedrooms[item.name]}
@@ -251,7 +253,9 @@ const FilterSideBar = ({
           <div className="title">Avaibility</div>
           <div className="available--checkbox checkbox">
             {availableLabel.map((item) => (
-              <label className="available--label label" key={item.key}>
+              <label className={`label ${
+                available[item.name] ? "selected" : ""
+              }`} key={item.key}>
                 <Checkbox
                   name={item.name}
                   checked={available[item.name]}
@@ -267,7 +271,9 @@ const FilterSideBar = ({
           <div className="title">Sharing Per Room</div>
           <div className="checkbox">
             {sharingLabel.map((item) => (
-              <label className="label" key={item.key}>
+              <label className={`label ${
+                sharing[item.name] ? "selected" : ""
+              }`} key={item.key}>
                 <Checkbox
                   name={item.name}
                   checked={sharing[item.name]}
@@ -282,7 +288,9 @@ const FilterSideBar = ({
           <div className="title">services</div>
           <div className="checkbox">
               {servicesList.map((item) => (
-                <label className="label" key={item.key}>
+                <label className={`label ${
+                  services[item.name] ? "selected" : ""
+                }`} key={item.key}>
                   <Checkbox
                     name={item.name}
                     checked={services[item.name]}
